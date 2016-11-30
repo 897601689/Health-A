@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.health_a.R;
 import com.health_a.activity.test.EcgActivity;
 import com.health_a.dao.DBOperation;
+import com.health_a.dialog.ActionSheetDialog;
+import com.health_a.dialog.ActionSheetDialog.OnSheetItemClickListener;
+import com.health_a.dialog.ActionSheetDialog.SheetItemColor;
 import com.health_a.parsing.Mcu_Parsing;
 import com.health_a.parsing.Spo2_Parsing;
 import com.health_a.util.Global;
@@ -168,7 +171,25 @@ public class MainActivity extends Activity {
                 break;
             case R.id.m_save:
                 Intent intent = new Intent(this, MenuBpActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
+                new ActionSheetDialog(MainActivity.this)
+                        .builder()
+                        .setCancelable(false)
+                        .setCanceledOnTouchOutside(false)
+                        .addSheetItem("血压菜单", SheetItemColor.Blue,
+                                new OnSheetItemClickListener() {
+                                    @Override
+                                    public void onClick(int which) {
+
+                                    }
+                                })
+                        .addSheetItem("心电菜单", SheetItemColor.Blue,
+                                new OnSheetItemClickListener() {
+                                    @Override
+                                    public void onClick(int which) {
+
+                                    }
+                                }).show();
                 break;
             case R.id.ecg_info:
                 Global.isEcgAll = true;
@@ -276,7 +297,7 @@ public class MainActivity extends Activity {
                     mHandler.sendEmptyMessage(201);
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
 
         }
@@ -295,7 +316,7 @@ public class MainActivity extends Activity {
                     mHandler.sendEmptyMessage(301);
                 }
             } catch (Exception ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         }
     }

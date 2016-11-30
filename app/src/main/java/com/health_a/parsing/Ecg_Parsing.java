@@ -709,7 +709,7 @@ public class Ecg_Parsing {
                 //Log.e("null", "null");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
 
 

@@ -54,7 +54,7 @@ public class MySerialPort {
                 return buffer;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             throw e;
         }
         return null;

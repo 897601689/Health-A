@@ -104,7 +104,7 @@ public class Spo2_Parsing {
                 //Log.e("null", "null");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
