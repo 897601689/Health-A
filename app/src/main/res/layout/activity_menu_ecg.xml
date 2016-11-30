@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="心电设置"
+        android:textColor="#444"
+        android:textSize="26sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="导联设置"
+            android:textColor="#444"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/channel"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="心电增益"
+            android:textColor="#444"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_gain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/gain" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="滤波模式"
+            android:textColor="#444"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/filter"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="陷波滤波"
+            android:textColor="#444"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinner_notch_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/notch_filter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:padding="10dp">
+
+        <RadioGroup
+            android:id="@+id/channel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="导联系统"
+                android:textColor="#444"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_channel12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="12导" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_channel5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5导" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_channel3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3导" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/qibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#444"
+                android:text="起搏分析" />
+            <RadioButton
+                android:id="@+id/rdoBtn_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="关" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/st"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#444"
+                android:text="ST分析" />
+            <RadioButton
+                android:id="@+id/rdoBtn_st_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="关" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_st_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="开" />
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textColor="#444"
+                android:text="模式" />
+            <RadioButton
+                android:id="@+id/rdoBtn_adult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="成人" />
+
+            <RadioButton
+                android:id="@+id/rdoBtn_child"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小儿" />
+
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>

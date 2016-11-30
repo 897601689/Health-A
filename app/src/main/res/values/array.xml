@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="BP">
+        <item >成年</item>
+        <item >儿童</item>
+        <item >婴幼儿</item>
+    </string-array>
+    <string-array name="Query">
+        <item >全部</item>
+        <item >心电/心率</item>
+        <item >血氧检测</item>
+        <item >体温检测</item>
+        <item >血压检测</item>
+    </string-array>
+    <string-array name="channel">
+        <item >通道1</item>
+        <item >通道2</item>
+        <item >通道3</item>
+        <item >自动</item>
+    </string-array>
+    <string-array name="gain">
+        <item >X0.25</item>
+        <item >X0.5</item>
+        <item >X1</item>
+        <item >X2</item>
+    </string-array>
+    <string-array name="filter">
+        <item >诊断</item>
+        <item >监护</item>
+        <item >手术</item>
+        <item >强滤波</item>
+    </string-array>
+    <string-array name="notch_filter">
+        <item >OFF</item>
+        <item >50HZ</item>
+        <item >60HZ</item>
+    </string-array>
+    <string-array name="ac_time">
+        <item >0分钟</item>
+        <item >1分钟</item>
+        <item >2分钟</item>
+        <item >3分钟</item>
+        <item >4分钟</item>
+        <item >5分钟</item>
+        <item >10分钟</item>
+        <item >15分钟</item>
+        <item >30分钟</item>
+        <item >60分钟</item>
+        <item >90分钟</item>
+        <item >120分钟</item>
+        <item >180分钟</item>
+        <item >240分钟</item>
+        <item >480分钟</item>
+    </string-array>
+    <string-array name="gas">
+        <item >80</item>
+        <item >100</item>
+        <item >120</item>
+        <item >140</item>
+        <item >160</item>
+        <item >180</item>
+        <item >200</item>
+        <item >220</item>
+        <item >240</item>
+    </string-array>
+</resources>

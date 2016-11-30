@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    tools:context=".activity.LoginActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edit_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/edit_pass"
+        android:layout_alignStart="@+id/edit_pass"
+        android:layout_marginBottom="35dp"
+        android:background="@drawable/edittext_default"
+        android:gravity="center"
+        android:hint="@string/user_name"
+        android:maxLength="10"
+        android:singleLine="true"
+        android:textSize="22sp" />
+
+    <EditText
+        android:id="@+id/edit_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:background="@drawable/edittext_default"
+        android:gravity="center"
+        android:hint="@string/user_pass"
+        android:maxLength="16"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="364dp"
+        android:background="@drawable/login_btn" />
+</RelativeLayout>

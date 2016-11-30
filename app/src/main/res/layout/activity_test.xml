@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m_bg"
+    android:orientation="vertical"
+    tools:context=".activity.TestInfoActivity">
+
+    <RelativeLayout
+        android:id="@+id/test_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/test_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="检测数据"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/test_user_layout"
+        android:layout_below="@+id/test_title_layout"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/bp_bg"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/test_names_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="姓名："
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/test_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/test_names_txt"
+            android:background="@drawable/spo2_result"
+            android:gravity="center"
+            android:text="--"
+            android:textColor="#000"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/test_sexs_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/test_name_txt"
+            android:text="性别："
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/test_sex_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/test_sexs_txt"
+            android:background="@drawable/spo2_result"
+            android:gravity="center"
+            android:text="--"
+            android:textColor="#000"
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/test_ages_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/test_sex_txt"
+            android:text="年龄："
+            android:textSize="22sp" />
+
+        <TextView
+            android:id="@+id/test_age_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/test_ages_txt"
+            android:background="@drawable/spo2_result"
+            android:gravity="center"
+            android:text="--"
+            android:textColor="#000"
+            android:textSize="22sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/test_btn_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/test_user_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/info_bg"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/test_query_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/test_query_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/info_id_white"
+                android:ems="9"
+                android:hint="请输入要查询的信息"
+                android:maxLength="18"
+                android:paddingLeft="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/test_query_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="10dp"
+                android:text="@string/info_query" />
+
+            <TextView
+                android:id="@+id/test_user_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="10dp"
+                android:text="关联用户" />
+
+            <Spinner
+                android:id="@+id/test_query_spn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:entries="@array/Query" />
+            <TextView
+                android:id="@+id/test_all_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="10dp"
+                android:text="全　部"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/test_query_layout"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/test_start_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/info_id_white"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:paddingLeft="10dp"
+                android:text="至"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/test_end_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/info_id_white"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/test_info_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/test_btn_layout"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
+
+            <TextView
+                style="@style/test_text_style"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/test_result_name"
+                android:text="项目名称" />
+
+            <TextView
+                style="@style/test_text_style"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/test_result"
+                android:text="检测结果" />
+
+            <TextView
+                style="@style/test_text_style"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/test_result"
+                android:text="检测时间" />
+
+            <TextView
+                style="@style/test_text_style"
+                android:background="@drawable/test_result_name"
+                android:text="医生姓名" />
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/test_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title_layout"
+            android:layout_marginTop="4dp"
+            android:divider="#00000000"
+            android:paddingBottom="40dp"
+            android:scrollbars="none">
+
+        </ListView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

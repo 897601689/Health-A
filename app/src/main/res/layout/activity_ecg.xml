@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m_bg">
+
+    <RelativeLayout
+        android:id="@+id/ecg_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/ecg_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="心率检测"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ecg_mid_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ecg_title_layout"
+        android:layout_centerInParent="true"
+        android:background="@drawable/ecg_k2"
+        android:gravity="center">
+        <!-- 左侧第一个 -->
+        <LinearLayout
+            android:id="@+id/ecg_info_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ecg_k3"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <!-- 姓名 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="姓名："
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/ecg_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textSize="25sp" />
+            </LinearLayout>
+            <!-- 性别 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="性别："
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/ecg_sex_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textSize="25sp" />
+            </LinearLayout>
+            <!-- 年龄 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="年龄："
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/ecg_age_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ecg_info_layout"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ecg_k6"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="心率："
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/ecg_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:text="--"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="呼吸率："
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/resp_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="1"
+                    android:text="--"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+            <!-- 导联状态 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ecg_k6"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="RA：" />
+
+                    <TextView
+                        android:id="@+id/txt_ra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="LL：" />
+
+                    <TextView
+                        android:id="@+id/txt_ll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="LA：" />
+
+                    <TextView
+                        android:id="@+id/txt_la"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V1：" />
+
+                    <TextView
+                        android:id="@+id/txt_v1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V2：" />
+
+                    <TextView
+                        android:id="@+id/txt_v2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V3：" />
+
+                    <TextView
+                        android:id="@+id/txt_v3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V4：" />
+
+                    <TextView
+                        android:id="@+id/txt_v4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V5：" />
+
+                    <TextView
+                        android:id="@+id/txt_v5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="on" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="V6：" />
+
+                    <TextView
+                        android:id="@+id/txt_v6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="on" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/ecg_k5"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST1：" />
+
+                    <TextView
+                        android:id="@+id/txt_st1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST2：" />
+
+                    <TextView
+                        android:id="@+id/txt_st2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST3：" />
+
+                    <TextView
+                        android:id="@+id/txt_st3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST4：" />
+
+                    <TextView
+                        android:id="@+id/txt_st4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST5：" />
+
+                    <TextView
+                        android:id="@+id/txt_st5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST6：" />
+
+                    <TextView
+                        android:id="@+id/txt_st6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST7：" />
+
+                    <TextView
+                        android:id="@+id/txt_st7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="ST8：" />
+
+                    <TextView
+                        android:id="@+id/txt_st8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:text="-1.00" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ecg_mid_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ecg_k1"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- 增益和时间 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_ecg_gain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ecg_btn_nor"
+                    android:gravity="center"
+                    android:text="切换增益：0.5"
+                    android:textColor="@color/White"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:text="监护时间"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/ecg_time_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/ecg_time"
+                    android:gravity="center"
+                    android:text="2016-10-26 14:48:20"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <!-- 左侧 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_I"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_II"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_III"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_AVR"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_AVL"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_AVF"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+
+                </LinearLayout>
+                <!-- 右侧 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V1"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V2"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V3"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V4"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V5"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+
+                    <com.health_a.util.MySurfaceView
+                        android:id="@+id/ecg_V6"
+                        android:layout_width="361px"
+                        android:layout_height="121px"
+                        android:layout_marginTop="10dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

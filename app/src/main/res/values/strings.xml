@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Health-A</string>
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="age">年龄</string>
+    <string name="id">身份证号</string>
+    <string name="user_name">用户名</string>
+    <string name="user_pass">密码</string>
+    <string name="workId">工作证号</string>
+    <string name="info_query">查　询</string>
+    <string name="info_add">添　加</string>
+    <string name="info_update">修　改</string>
+    <string name="info_del">删　除</string>
+    <string name="save">保　存</string>
+    <string name="set">设　置</string>
+</resources>

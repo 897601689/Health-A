@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m_bg">
+
+    <RelativeLayout
+        android:id="@+id/spo2_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/spo2_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="血氧检测"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/spo2_mid_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spo2_title_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/info_item_gray"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/temp_text"
+                android:text="血氧值" />
+
+            <TextView
+                style="@style/temp_text"
+                android:background="@drawable/spo2_result" />
+
+            <TextView
+                style="@style/temp_text"
+                android:text="脉 率" />
+
+            <TextView
+                style="@style/temp_text"
+                android:background="@drawable/spo2_result" />
+
+            <TextView
+                android:id="@+id/spo2_set_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="15dp"
+                android:text="@string/set" />
+
+            <TextView
+                android:id="@+id/spo2_save_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="15dp"
+                android:text="@string/save" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spo2_mid_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/spo2_k1"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="血氧波"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/spo2_k2"
+            android:textSize="40sp" />
+
+    </LinearLayout>
+</RelativeLayout>

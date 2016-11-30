@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m_bg">
+
+    <RelativeLayout
+        android:id="@+id/temp_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/temp_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="额温检测"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/temp_temp1_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_title_layout"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/info_bg"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/temp_mid_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/temp_text"
+                android:text="时 间" />
+
+            <TextView
+                android:id="@+id/temp_time_txt"
+                style="@style/temp_text"
+                android:background="@drawable/temp_time"
+                android:text="2016-08-02 17:50:10" />
+
+            <TextView
+                android:id="@+id/temp_save1_btn"
+                style="@style/button_small"
+                android:layout_marginLeft="35dp"
+                android:text="@string/save" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/temp_result_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temp_mid_layout"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/temp_text"
+                android:text="结 果" />
+
+            <TextView
+                style="@style/temp_text"
+                android:background="@drawable/temp_result" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="体 温"
+                android:textSize="25sp" />
+
+            <TextView
+                style="@style/temp_text"
+                android:background="@drawable/temp_result" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/temp_girl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_temp1_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/temp_girl" />
+
+    <TextView
+        android:id="@+id/temp_temp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_girl"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="45dp"
+        android:text="体温检测"
+        android:textColor="#ffffff"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:id="@+id/temp_temp2_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_temp2"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/info_item_gray"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/temp_text"
+            android:text="结 果" />
+
+        <TextView
+            style="@style/temp_text"
+            android:background="@drawable/temp_result" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:text="体 温"
+            android:textSize="25sp" />
+
+        <TextView
+            style="@style/temp_text"
+            android:background="@drawable/temp_result" />
+
+        <TextView
+            android:id="@+id/temp_save2_btn"
+            style="@style/button_small"
+            android:layout_marginLeft="35dp"
+            android:text="@string/save" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temp_temp2_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/temp_boy" />
+</RelativeLayout>

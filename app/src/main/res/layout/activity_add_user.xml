@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/m_bg">
+
+    <RelativeLayout
+        android:id="@+id/add_title_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/add_user_back"
+            android:layout_width="50dp"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/back_left" />
+
+        <TextView
+            android:id="@+id/add_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="添加用户信息"
+            android:textColor="#ffffff"
+            android:textSize="40sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_title_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ge_ren_ji_ben_xin_xi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="15dip"
+            android:layout_marginTop="15dip"
+            android:text="个人基本信息"
+            android:textColor="@color/Red"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="姓名" />
+
+            <EditText
+                android:id="@+id/add_userName_edit"
+                style="@style/add_info_edit" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:text="*"
+                android:textColor="@color/Red" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dip"
+                android:text="身份证号" />
+
+            <EditText
+                android:id="@+id/add_userId_edit"
+                style="@style/add_info_edit"
+                android:maxLength="18" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="@color/Red" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="性别" />
+            <!-- 未知的性别 、男、女、未说明性别 -->
+            <TextView
+                android:id="@+id/add_userSex_btn"
+                style="@style/add_info_btn"
+                android:layout_marginLeft="10dip"
+                android:gravity="center"
+                android:text="男" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="出生日期" />
+
+            <EditText
+                android:id="@+id/add_userAge_btn"
+                style="@style/add_info_edit"
+                android:enabled="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="请选择" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="文化程度" />
+            <!-- 文盲及半文盲、小学、初中、高中/技校/中专、大学专科及以上、不详 -->
+
+            <TextView
+                android:id="@+id/add_diploma_btn"
+                style="@style/add_info_btn"
+                android:layout_marginLeft="10dip"
+                android:gravity="center"
+                android:text="大学专科及以上" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="年龄" />
+
+            <EditText
+                android:id="@+id/add_userAge_edit"
+                style="@style/add_info_edit"
+                android:enabled="false" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="工作单位" />
+
+            <EditText
+                android:id="@+id/add_gong_zuo_dan_wei"
+                style="@style/add_info_edit" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="本人电话" />
+
+            <EditText
+                android:id="@+id/add_phone_edit"
+                style="@style/add_info_edit"
+                android:editable="false"
+                android:inputType="phone"
+                android:maxLength="15"
+                android:text="13000000000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="联系人姓名" />
+
+            <EditText
+                android:id="@+id/add_lian_xi_ren_xing_ming"
+                style="@style/add_info_edit"
+                android:maxLength="10" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="联系人电话" />
+
+            <EditText
+                android:id="@+id/add_lian_xi_ren_dian_hua"
+                style="@style/add_info_edit"
+                android:inputType="phone"
+                android:maxLength="15" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="常住类型" />
+            <!-- 户籍、非户籍 -->
+            <TextView
+                android:id="@+id/add_domicile_btn"
+                style="@style/add_info_btn"
+                android:layout_marginLeft="10dip"
+                android:gravity="center"
+                android:text="户籍" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="民族" />
+            <!-- 汉族、少数民族 -->
+            <TextView
+                android:id="@+id/add_min_zu"
+                style="@style/add_info_btn"
+                android:layout_marginLeft="10dip"
+                android:gravity="center"
+                android:text="汉族" />
+
+            <EditText
+                android:id="@+id/add_shao_shu_min_zu"
+                style="@style/add_info_edit"
+                android:layout_width="100dip"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dip"
+                android:text="血型" />
+            <!-- A型、B型、O型、AB型、不详 -->
+
+            <TextView
+                android:id="@+id/add_xue_xing"
+                style="@style/add_info_btn"
+                android:layout_marginLeft="10dip"
+                android:gravity="center"
+                android:text="A型" />
+
+            <TextView
+                style="@style/add_info_txt"
+                android:layout_width="130dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55dip"
+                android:text="RH阴性" />
+            <!-- 是、否、不详 -->
+
+            <TextView
+                android:id="@+id/add_RH_yin_xing"
+                style="@style/add_info_btn"
+                android:gravity="center"
+                android:layout_marginLeft="10dip"
+                android:text="否" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dip"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/add_uCancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/m_button"
+                android:text=" 取  消 "
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/add_uSave_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:gravity="center"
+                android:background="@drawable/m_button"
+                android:text=" 保  存 "
+                android:textColor="#fff"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

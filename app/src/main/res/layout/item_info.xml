@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <LinearLayout
+        android:id="@+id/item_title_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@drawable/info_item_white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/item_chk"
+            style="@style/list_checkbox"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp" />
+
+        <View style="@style/vertical_layout" />
+
+        <TextView
+            android:id="@+id/item_id"
+            style="@style/list_tv1"
+            android:text="150423199303090016" />
+
+        <View style="@style/vertical_layout" />
+
+        <TextView
+            android:id="@+id/item_name"
+            style="@style/list_tv2"
+            android:text="@string/name" />
+
+        <View style="@style/vertical_layout" />
+
+        <TextView
+            android:id="@+id/item_sex"
+            style="@style/list_tv2"
+            android:text="@string/sex" />
+
+        <View style="@style/vertical_layout" />
+
+        <TextView
+            android:id="@+id/item_age"
+            style="@style/list_tv2"
+            android:text="@string/age" />
+    </LinearLayout>
+
+</LinearLayout>
