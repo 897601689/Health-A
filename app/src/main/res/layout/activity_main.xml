@@ -503,11 +503,43 @@
 
         </LinearLayout>
         <!-- 下部 -->
-        <com.health_a.util.MySurfaceView
-            android:id="@+id/ecg"
-            android:layout_width="751px"
-            android:layout_height="371px"
-            android:layout_marginTop="10dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <com.health_a.util.MySurfaceView
+                android:id="@+id/ecg"
+                android:layout_width="751px"
+                android:layout_height="371px" />
+
+            <TextView
+                android:id="@+id/btn_last"
+                android:layout_width="60px"
+                android:layout_height="40px"
+                android:layout_alignRight="@+id/ecg"
+                android:layout_margin="20dp"
+                android:background="@drawable/btn_small"
+                android:gravity="center"
+                android:text="∧"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/btn_next"
+                android:layout_width="60px"
+                android:layout_height="40px"
+                android:layout_alignBottom="@+id/ecg"
+                android:layout_alignRight="@+id/ecg"
+                android:layout_margin="20dp"
+                android:background="@drawable/btn_small"
+                android:gravity="center"
+                android:text="∨"
+                android:textColor="@color/White"
+                android:textSize="25sp" />
+
+        </RelativeLayout>
+
     </LinearLayout>
 
     <!-- 底部按键 -->

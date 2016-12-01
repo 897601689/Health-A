@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Admin on 2016/10/27.
+ * Created by Admin on 2016/10/27. 画曲线控件
  */
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
@@ -59,6 +59,18 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     public void setBackColor(int backColor) {
         this.backColor = backColor;
+    }
+
+    private int textSize = 14;//字体大小
+
+    public void setTextSize(int textSize) {
+        this.textSize = textSize;
+    }
+
+    private int amplitude = 25;//幅值长度
+
+    public void setAmplitude(int amplitude) {
+        this.amplitude = amplitude;
     }
 
     //demo使用
@@ -137,17 +149,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void run() {
         try {
-            draw();
+            drawCurve();
             Thread.sleep(1000);
             while (mIsDrawing) {
                 Thread.sleep(5);
-                if(curve == -1)
-                    continue;
-                draw();
-                if (x > getWidth())
-                    x = 0;
-                else
-                    x++;
+                drawCurve();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -155,25 +161,32 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
-    public void draw() {
+    public void drawCurve() {
 
         try {
-            //mCanvas = mSurfaceHolder.lockCanvas();
-            mCanvas = mSurfaceHolder.lockCanvas(new Rect(x, 0, x + 3 + 15, getHeight()));//
-
-            // draw something
-            // SurfaceView背景
-            mCanvas.drawColor(backColor);
-            //final  float  ratio = getHeight() / 250;
-            float y2 = Integer.valueOf(curve);
-            float yy1 = getHeight() - (getHeight() * y / 250);
-            float yy2 = getHeight() - (getHeight() * y2 / 250);
-            mCanvas.drawLine(x, yy1, x + 1, yy2, mPaint);
-            mCanvas.drawText(info, 20, 20, mPaint);
-            mCanvas.drawLine(getWidth() - 30, ((getHeight() - 50) / 2), getWidth() - 30, ((getHeight() - 50) / 2) + 50, mPaint);
-            //Log.e(y+" "+yy1,y2+" "+yy2);
-            y = y2;
-
+            //curve为-1时数据无效
+            if (curve != -1) {
+                mCanvas = mSurfaceHolder.lockCanvas(new Rect(x, 0, x + 3 + 15, getHeight()));//
+                mCanvas.drawColor(backColor);
+                float y2 = curve;
+                float yy1 = getHeight() - (getHeight() * y / 250);
+                float yy2 = getHeight() - (getHeight() * y2 / 250);
+                mCanvas.drawLine(x, yy1, x + 1, yy2, mPaint);
+                mCanvas.drawText(info, 10, 20, mPaint);
+                mCanvas.drawLine(getWidth() - 30, ((getHeight() - amplitude) / 2), getWidth() - 30, ((getHeight() - amplitude) / 2) + amplitude, mPaint);
+                //Log.e(y+" "+yy1,y2+" "+yy2);
+                y = y2;
+                if (x > getWidth())
+                    x = 0;
+                else
+                    x++;
+            }else {
+                mCanvas = mSurfaceHolder.lockCanvas();
+                mCanvas.drawColor(backColor);
+                mPaint.setTextSize(textSize);
+                mCanvas.drawText(info, 10, 20, mPaint);
+                mCanvas.drawLine(getWidth() - 30, ((getHeight() - amplitude) / 2), getWidth() - 30, ((getHeight() - amplitude) / 2) + amplitude, mPaint);
+            }
 
         } catch (Exception e) {
             //Log.e("error", "" + e.getMessage());
@@ -182,7 +195,6 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 mSurfaceHolder.unlockCanvasAndPost(mCanvas);
             }
         }
-
 
     }
 

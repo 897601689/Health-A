@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ import com.health_a.util.Global;
 import com.health_a.util.MySurfaceView;
 
 import java.io.IOException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,12 +105,16 @@ public class MainActivity extends Activity {
     TextView mSysInfo;
     @BindView(R.id.ecg)
     MySurfaceView ecg_Curve;
+    @BindView(R.id.btn_last)
+    TextView btnLast;
+    @BindView(R.id.btn_next)
+    TextView btnNext;
     //endregion
 
     private String UserID = null;//当前进行检测用户
     private String DoctorID = null;//当前检测医生
     private DBOperation db;
-
+    private int lead_index = 1;
     Spo2_Parsing spo2 = new Spo2_Parsing(); //血氧协议解析
     Mcu_Parsing mcu = new Mcu_Parsing();//单片机协议解析
 
@@ -119,7 +125,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);   //应用运行时，保持屏幕高亮，不锁屏
         ButterKnife.bind(this);
-        Toast.makeText(this, "串口打开成功！", Toast.LENGTH_SHORT).show();
         init();
     }
 
@@ -149,9 +154,9 @@ public class MainActivity extends Activity {
             Global.mcu_Com.Open("/dev/ttyMT2", 38400);
             Global.ecg_Com.Write(new byte[]{0x51, (byte) 0x80, (byte) 0x81});//2K体温探头
             //Global.mcu_Com.Write(Mcu_Parsing.bp_Start);
-            Toast.makeText(this, "串口打开成功！", Toast.LENGTH_SHORT).show();
+            Log.e("MainActivity", "串口打开成功！");
         } catch (Exception ex) {
-            Toast.makeText(this, "串口打开失败！", Toast.LENGTH_SHORT).show();
+            Log.e("MainActivity", "串口打开失败！");
         }
 
         new Thread(new Spo2Thread()).start();
@@ -159,9 +164,9 @@ public class MainActivity extends Activity {
         new Thread(new McuThread()).start();
     }
 
-    @OnClick({R.id.m_scan, R.id.bp_text, R.id.m_save, R.id.ecg_info, R.id.m_user_info, R.id.m_test_info, R.id.m_sys_info})
+    @OnClick({R.id.m_scan, R.id.bp_text, R.id.btn_last, R.id.btn_next, R.id.m_save, R.id.ecg_info, R.id.m_user_info, R.id.m_test_info, R.id.m_sys_info})
     public void onClick(View view) {
-
+        Intent intent;
         switch (view.getId()) {
             case R.id.m_scan:
                 break;
@@ -169,9 +174,19 @@ public class MainActivity extends Activity {
                 Mcu_Parsing.SendBpCmd(Global.mcu_Com, Mcu_Parsing.bp_Start);//开始手动测量
                 txtBpState.setText("测量中");
                 break;
+            case R.id.btn_last:
+                lead_index--;
+                if (lead_index < 0)
+                    lead_index = 11;
+                Log.e("MainActivity", "" + lead_index);
+                break;
+            case R.id.btn_next:
+                lead_index++;
+                if (lead_index > 11)
+                    lead_index = 0;
+                Log.e("MainActivity", "" + lead_index);
+                break;
             case R.id.m_save:
-                Intent intent = new Intent(this, MenuBpActivity.class);
-                //startActivity(intent);
                 new ActionSheetDialog(MainActivity.this)
                         .builder()
                         .setCancelable(false)
@@ -180,14 +195,16 @@ public class MainActivity extends Activity {
                                 new OnSheetItemClickListener() {
                                     @Override
                                     public void onClick(int which) {
-
+                                        Intent intent = new Intent(MainActivity.this, MenuBpActivity.class);
+                                        startActivity(intent);
                                     }
                                 })
                         .addSheetItem("心电菜单", SheetItemColor.Blue,
                                 new OnSheetItemClickListener() {
                                     @Override
                                     public void onClick(int which) {
-
+                                        Intent intent = new Intent(MainActivity.this, MenuEcgActivity.class);
+                                        startActivity(intent);
                                     }
                                 }).show();
                 break;
@@ -263,23 +280,87 @@ public class MainActivity extends Activity {
                     if (Global.isEcgAll) {
                         continue;
                     }
-                    ecg_Curve.setInfo("I");
-                    if (Global.ecg.getEcg_data().ECG_I.size() > 0) {
-                        for (int i : Global.ecg.getEcg_data().ECG_I) {
-                            ecg_Curve.setCurve(i);
-                        }
-                    } else {
-                        ecg_Curve.setCurve(-1);
+
+                    //region 判断画哪条曲线
+                    String lead;
+                    List<Integer> data;
+
+                    switch (lead_index) {
+                        case 0:
+                            lead = "I";
+                            data = Global.ecg.getEcg_data().ECG_I;
+                            break;
+                        case 1:
+                            lead = "II";
+                            data = Global.ecg.getEcg_data().ECG_II;
+                            break;
+                        case 2:
+                            lead = "III";
+                            data = Global.ecg.getEcg_data().ECG_III;
+                            break;
+                        case 3:
+                            lead = "AVR";
+                            data = Global.ecg.getEcg_data().ECG_AVR;
+                            break;
+                        case 4:
+                            lead = "AVL";
+                            data = Global.ecg.getEcg_data().ECG_AVL;
+                            break;
+                        case 5:
+                            lead = "AVF";
+                            data = Global.ecg.getEcg_data().ECG_AVF;
+                            break;
+                        case 6:
+                            lead = "V1";
+                            data = Global.ecg.getEcg_data().ECG_V1;
+                            break;
+                        case 7:
+                            lead = "V2";
+                            data = Global.ecg.getEcg_data().ECG_V2;
+                            break;
+                        case 8:
+                            lead = "V3";
+                            data = Global.ecg.getEcg_data().ECG_V3;
+                            break;
+                        case 9:
+                            lead = "V4";
+                            data = Global.ecg.getEcg_data().ECG_V4;
+                            break;
+                        case 10:
+                            lead = "V5";
+                            data = Global.ecg.getEcg_data().ECG_V5;
+                            break;
+                        case 11:
+                            lead = "V6";
+                            data = Global.ecg.getEcg_data().ECG_V6;
+                            break;
+                        default:
+                            lead = "I";
+                            data = Global.ecg.getEcg_data().ECG_I;
+                            break;
                     }
-                    /*for (int i = 0; i < Global.ecg.getEcg_data().ECG_I.size(); i+=2) {
-                        ecg_Curve.setCurve(Global.ecg.getEcg_data().ECG_I.get(i));
-                    }*/
+                    //endregion
+
+                    SetEcgData(lead, data);
 
                     // 发送这个消息到消息队列中
                     mHandler.sendEmptyMessage(101);
                 }
             } catch (Exception e) {
                 //e.printStackTrace();
+            }
+        }
+
+        private void SetEcgData(String lead, List<Integer> data) {
+            ecg_Curve.setInfo(lead);
+            ecg_Curve.setTextSize(20);
+            ecg_Curve.setAmplitude(75);
+            if (data.size() > 0) {
+                for (int i : data) {
+                    ecg_Curve.setCurve(i);
+                }
+            } else {
+                ecg_Curve.setCurve(-1);
             }
         }
 

@@ -51,7 +51,7 @@ public class SerialPort {
                     throw new SecurityException();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 throw new SecurityException();
             }
         }
