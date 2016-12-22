@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -57,17 +58,17 @@ public class UserInfoActivity extends Activity {
         setContentView(R.layout.activity_user);
         ButterKnife.bind(this);
         init();
-//        userInfoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////                TextView time_txt = (TextView) view.findViewById(R.id.item_id);
-////                Intent intent = new Intent(UserInfoActivity.this,AddUserInfoActivity.class);
-////                intent.putExtra("type", "info");
-////                intent.putExtra("id", time_txt.getText().toString());
-//                //startActivity(intent);
-//                Log.e("22","11");
-//            }
-//        });
+        userInfoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView time_txt = (TextView) view.findViewById(R.id.item_id);
+                Intent intent = new Intent(UserInfoActivity.this,AddUserInfoActivity.class);
+                intent.putExtra("type", "info");
+                intent.putExtra("id", time_txt.getText().toString());
+                startActivity(intent);
+                Log.e("22","11");
+            }
+        });
     }
 
     // 初始化

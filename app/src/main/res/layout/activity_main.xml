@@ -361,7 +361,7 @@
                         android:layout_below="@+id/title_resp"
                         android:layout_marginStart="20dp"
                         android:layout_toEndOf="@+id/title_resp"
-                        android:text="80"
+                        android:text="30"
                         android:textColor="#FFFF00"
                         android:textSize="25sp" />
 
@@ -508,11 +508,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
 
+
             <com.health_a.util.MySurfaceView
                 android:id="@+id/ecg"
                 android:layout_width="751px"
                 android:layout_height="371px" />
-
+            <TextView
+                android:id="@+id/ecg_lead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textColor="#00ff00"
+                android:text="I"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/btn_last"
                 android:layout_width="60px"

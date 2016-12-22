@@ -22,10 +22,9 @@ public class Mcu_Parsing {
     private List<Byte> list = new ArrayList<>();
     private List<byte[]> data = new ArrayList<>();
 
-    byte[] mcu_data = new byte[12];
-    byte[] bp_data1 = new byte[10];
-    byte[] bp_data2 = new byte[42];
-    byte[] id_data = new byte[11];
+    private byte[] bp_data1 = new byte[10];
+    private byte[] bp_data2 = new byte[42];
+    private byte[] id_data = new byte[11];
 
     //region 血压
     private String cuff_Pressure;   //袖带压
@@ -209,7 +208,7 @@ public class Mcu_Parsing {
 
                     //按键板 信息
                     if (list.get(i) == 0xff && buffer[i + 11] == 0xee) {
-                        mcu_data = GetData(i, 12, list);
+                        byte[] mcu_data = GetData(i, 12, list);
                         i = i - 1;
                         Parsing_Mcu(mcu_data);
                     }

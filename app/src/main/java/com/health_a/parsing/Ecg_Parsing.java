@@ -19,12 +19,12 @@ import android_serialport_api.MySerialPort;
  */
 public class Ecg_Parsing {
 
-    byte[] bytes = new byte[512];
-    byte[] data = new byte[9];
-    final List<Byte> list = new ArrayList<>();
+    private byte[] bytes = new byte[512];
+    private byte[] data = new byte[9];
+    private final List<Byte> list = new ArrayList<>();
 
-    boolean isHeartBeaten = false;//是否包含心跳
-    boolean isPacingPulse = false;//是否包含起搏脉冲
+    private boolean isHeartBeaten = false;//是否包含心跳
+    private boolean isPacingPulse = false;//是否包含起搏脉冲
 
     //region 实体类
     //导联状态
@@ -195,6 +195,7 @@ public class Ecg_Parsing {
             ecg_data.clear();//清除心电曲线数据
             bytes = port.Read();
             if (bytes != null) {
+                list.clear();
                 for (byte aByte : bytes) {
                     list.add(aByte);
                 }
@@ -603,7 +604,7 @@ public class Ecg_Parsing {
                                         mode = "两个体温探头都脱落";
                                         break;
                                 }
-                                if (mode != "") {
+                                if (!"".equals(mode)) {
                                     AlertMessage.add(mode);//添加体温报警信息
                                 }
                                 tempData1 = (((data[1] >> 1 & 0x1) << 7) | (data[3] & 0x7F)) | ((((data[1] >> 2 & 0x1) << 7) | (data[4] & 0x7F)) << 8);

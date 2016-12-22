@@ -104,7 +104,34 @@ public class AddUserInfoActivity extends Activity {
             }
             addUserIdEdit.setEnabled(false);
             isUpadte = true;
-            addTitleTxt.setText("修改病人信息");
+            addTitleTxt.setText("修改用户信息");
+        }else if("info".equals(intent.getStringExtra("type"))){
+            id = intent.getStringExtra("id");
+            Log.e("id", id);
+            Cursor cursor = db.GetUserByCardId(id);
+            if (cursor.moveToNext()) {
+                addUserNameEdit.setText(cursor.getString(1));
+                addUserIdEdit.setText(cursor.getString(0));
+                addUserSexBtn.setText(cursor.getString(2));
+                addUserAgeEdit.setText(cursor.getString(3));
+                addPhoneEdit.setText(cursor.getString(4));
+                addUserAgeBtn.setText(Utils.getCsrq(id));
+            }
+            addUserIdEdit.setEnabled(false);
+            addUserNameEdit.setEnabled(false);
+            addUserSexBtn.setEnabled(false);
+            addGongZuoDanWei.setEnabled(false);
+            addPhoneEdit.setEnabled(false);
+            addLianXiRenXingMing.setEnabled(false);
+            addLianXiRenDianHua.setEnabled(false);
+            addDiplomaBtn.setEnabled(false);
+            addDomicileBtn.setEnabled(false);
+            addMinZu.setEnabled(false);
+            addXueXing.setEnabled(false);
+            addRHYinXing.setEnabled(false);
+            addUCancelBtn.setVisibility(View.GONE);
+            addUSaveBtn.setVisibility(View.GONE);
+            addTitleTxt.setText("查看用户信息");
         }
     }
 

@@ -77,7 +77,7 @@ public class TestInfoActivity extends Activity {
             case "体温检测":
                 AddTempData();
                 break;
-            case "xindian/心率":
+            case "心电/心率":
                 AddEcgData();
                 break;
             case "尿常规检测":

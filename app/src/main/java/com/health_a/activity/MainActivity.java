@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.health_a.R;
 import com.health_a.activity.test.EcgActivity;
@@ -109,16 +108,19 @@ public class MainActivity extends Activity {
     TextView btnLast;
     @BindView(R.id.btn_next)
     TextView btnNext;
+    @BindView(R.id.ecg_lead)
+    TextView ecgLead;
+
     //endregion
 
     private String UserID = null;//当前进行检测用户
     private String DoctorID = null;//当前检测医生
     private DBOperation db;
-    private int lead_index = 1;
+    private int lead_index = 0;
     Spo2_Parsing spo2 = new Spo2_Parsing(); //血氧协议解析
     Mcu_Parsing mcu = new Mcu_Parsing();//单片机协议解析
-
-
+    byte[] tempCmd = new byte[]{0x51, (byte) 0x80, (byte) 0x81};//2K体温探头
+    private String lead;//当前导联
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,14 +148,14 @@ public class MainActivity extends Activity {
 
     private void init() {
         ecg_Curve.setBackColor(Color.rgb(77, 77, 77));//设置背景颜色
+        ecg_Curve.setPen(Color.GREEN);//设置背景颜色
         db = new DBOperation(MainActivity.this);
         //DoctorID = Global.GetDoctorInfo();//获得登录医生信息
         try {
             Global.ecg_Com.Open("/dev/ttyMT1", 115200);
             Global.spo2_Com.Open("/dev/ttyMT3", 4800);
             Global.mcu_Com.Open("/dev/ttyMT2", 38400);
-            Global.ecg_Com.Write(new byte[]{0x51, (byte) 0x80, (byte) 0x81});//2K体温探头
-            //Global.mcu_Com.Write(Mcu_Parsing.bp_Start);
+            Global.ecg_Com.Write(tempCmd);//2K体温探头
             Log.e("MainActivity", "串口打开成功！");
         } catch (Exception ex) {
             Log.e("MainActivity", "串口打开失败！");
@@ -236,11 +238,12 @@ public class MainActivity extends Activity {
                     txtEcg.setText(String.valueOf(Global.ecg.getEcg()));
                     txtResp.setText(String.valueOf(Global.ecg.getResp()));
                     float temp = Global.ecg.getTempData1() / 10f;
-                    if (temp != 0.1f && temp != 0) {
+                    if (temp != 0.1f && temp != 55) {
                         txtTemp.setText(String.valueOf(temp));
                     } else {
                         txtTemp.setText("--");
                     }
+                    ecgLead.setText(lead);
                     break;
                 case 102:
                     break;
@@ -274,74 +277,17 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             try {
+                Thread.sleep(1000);
+                Global.ecg_Com.Write(tempCmd);//2K体温探头
+                Thread.sleep(100);
+                Global.ecg_Com.Write(tempCmd);//2K体温探头
                 while (true) {
-                    Thread.sleep(10);
+                    Thread.sleep(5);
                     Global.ecg.Parsing(Global.ecg_Com);
                     if (Global.isEcgAll) {
                         continue;
                     }
-
-                    //region 判断画哪条曲线
-                    String lead;
-                    List<Integer> data;
-
-                    switch (lead_index) {
-                        case 0:
-                            lead = "I";
-                            data = Global.ecg.getEcg_data().ECG_I;
-                            break;
-                        case 1:
-                            lead = "II";
-                            data = Global.ecg.getEcg_data().ECG_II;
-                            break;
-                        case 2:
-                            lead = "III";
-                            data = Global.ecg.getEcg_data().ECG_III;
-                            break;
-                        case 3:
-                            lead = "AVR";
-                            data = Global.ecg.getEcg_data().ECG_AVR;
-                            break;
-                        case 4:
-                            lead = "AVL";
-                            data = Global.ecg.getEcg_data().ECG_AVL;
-                            break;
-                        case 5:
-                            lead = "AVF";
-                            data = Global.ecg.getEcg_data().ECG_AVF;
-                            break;
-                        case 6:
-                            lead = "V1";
-                            data = Global.ecg.getEcg_data().ECG_V1;
-                            break;
-                        case 7:
-                            lead = "V2";
-                            data = Global.ecg.getEcg_data().ECG_V2;
-                            break;
-                        case 8:
-                            lead = "V3";
-                            data = Global.ecg.getEcg_data().ECG_V3;
-                            break;
-                        case 9:
-                            lead = "V4";
-                            data = Global.ecg.getEcg_data().ECG_V4;
-                            break;
-                        case 10:
-                            lead = "V5";
-                            data = Global.ecg.getEcg_data().ECG_V5;
-                            break;
-                        case 11:
-                            lead = "V6";
-                            data = Global.ecg.getEcg_data().ECG_V6;
-                            break;
-                        default:
-                            lead = "I";
-                            data = Global.ecg.getEcg_data().ECG_I;
-                            break;
-                    }
-                    //endregion
-
-                    SetEcgData(lead, data);
+                    SetEcgData();
 
                     // 发送这个消息到消息队列中
                     mHandler.sendEmptyMessage(101);
@@ -351,8 +297,69 @@ public class MainActivity extends Activity {
             }
         }
 
-        private void SetEcgData(String lead, List<Integer> data) {
-            ecg_Curve.setInfo(lead);
+        private void SetEcgData() {
+
+            //region 判断画哪条曲线
+
+            List<Integer> data;
+
+            switch (lead_index) {
+                case 0:
+                    lead = "I";
+                    data = Global.ecg.getEcg_data().ECG_I;
+                    break;
+                case 1:
+                    lead = "II";
+                    data = Global.ecg.getEcg_data().ECG_II;
+                    break;
+                case 2:
+                    lead = "III";
+                    data = Global.ecg.getEcg_data().ECG_III;
+                    break;
+                case 3:
+                    lead = "AVR";
+                    data = Global.ecg.getEcg_data().ECG_AVR;
+                    break;
+                case 4:
+                    lead = "AVL";
+                    data = Global.ecg.getEcg_data().ECG_AVL;
+                    break;
+                case 5:
+                    lead = "AVF";
+                    data = Global.ecg.getEcg_data().ECG_AVF;
+                    break;
+                case 6:
+                    lead = "V1";
+                    data = Global.ecg.getEcg_data().ECG_V1;
+                    break;
+                case 7:
+                    lead = "V2";
+                    data = Global.ecg.getEcg_data().ECG_V2;
+                    break;
+                case 8:
+                    lead = "V3";
+                    data = Global.ecg.getEcg_data().ECG_V3;
+                    break;
+                case 9:
+                    lead = "V4";
+                    data = Global.ecg.getEcg_data().ECG_V4;
+                    break;
+                case 10:
+                    lead = "V5";
+                    data = Global.ecg.getEcg_data().ECG_V5;
+                    break;
+                case 11:
+                    lead = "V6";
+                    data = Global.ecg.getEcg_data().ECG_V6;
+                    break;
+                default:
+                    lead = "I";
+                    data = Global.ecg.getEcg_data().ECG_I;
+                    break;
+            }
+            //endregion
+
+            ecg_Curve.setInfo("");
             ecg_Curve.setTextSize(20);
             ecg_Curve.setAmplitude(75);
             if (data.size() > 0) {
@@ -414,7 +421,6 @@ public class MainActivity extends Activity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     break;
                 case "按键-冻结":
                     break;

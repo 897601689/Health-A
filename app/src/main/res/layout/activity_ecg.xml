@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="心率检测"
+            android:text="心电检测"
             android:textColor="#ffffff"
             android:textSize="40sp" />
     </RelativeLayout>
@@ -180,57 +180,57 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="RA：" />
+                        android:text="RA："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_ra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="LL：" />
+                        android:text="LL："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_ll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="LA：" />
+                        android:text="LA："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_la"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V1：" />
+                        android:text="V1："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -242,71 +242,71 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V2：" />
+                        android:text="V2："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V3：" />
+                        android:text="V3："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V4：" />
+                        android:text="V4："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V5：" />
+                        android:text="V5："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="V6：" />
+                        android:text="V6："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_v6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="on" />
+                        android:text="on"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -316,8 +316,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:background="@drawable/ecg_k5"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -326,57 +326,57 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST1：" />
+                        android:text="ST1："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST2：" />
+                        android:text="ST2："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST3：" />
+                        android:text="ST3："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST4：" />
+                        android:text="ST4："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -387,57 +387,57 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST5：" />
+                        android:text="ST5："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST6：" />
+                        android:text="ST6："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST7：" />
+                        android:text="ST7："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="ST8：" />
+                        android:text="ST8："
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/txt_st8"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:text="-1.00" />
+                        android:text="-1.00"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -473,7 +473,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ecg_btn_nor"
                     android:gravity="center"
-                    android:text="切换增益：0.5"
+                    android:text="切换增益：1"
                     android:textColor="@color/White"
                     android:textSize="22sp" />
 

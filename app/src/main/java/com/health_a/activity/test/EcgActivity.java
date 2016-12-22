@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +28,8 @@ import butterknife.OnClick;
  */
 public class EcgActivity extends Activity {
 
+
+    //region 控件
     @BindView(R.id.ecg_back)
     ImageView ecgBack;
     @BindView(R.id.ecg_name_txt)
@@ -104,6 +107,7 @@ public class EcgActivity extends Activity {
     TextView txtSt7;
     @BindView(R.id.txt_st8)
     TextView txtSt8;
+    //endregion
 
     private TimeThread time_thread = new TimeThread();
     private DrawThread drawThread = new DrawThread();
@@ -173,7 +177,6 @@ public class EcgActivity extends Activity {
                     Global.ecg_gain = 0;
                 else
                     Global.ecg_gain++;
-
                 btnEcgGain.setText("切换增益：" + gain[Global.ecg_gain]);
                 MenuEcgActivity.SendCmd(MenuEcgActivity.gain_I_cmd.get(Global.ecg_gain));
                 MenuEcgActivity.SendCmd(MenuEcgActivity.gain_II_cmd.get(Global.ecg_gain));
@@ -252,11 +255,11 @@ public class EcgActivity extends Activity {
             try {
                 Thread.sleep(1500);
                 while (Global.isEcgAll) {
-                    Thread.sleep(10);
+                    Thread.sleep(5);
                     mHandler.sendEmptyMessage(2);
-                    /*if (!Global.isEcgAll) {
+                    if (!Global.isEcgAll) {
                         continue;
-                    }*/
+                    }
                     leadState = Global.ecg.getLeadState();  //导联状态
                     ecg_st = Global.ecg.getEcg_st();        //ST值
 
@@ -271,84 +274,84 @@ public class EcgActivity extends Activity {
                             ecgI.setCurve(i);
                         }
                     } else {
-                        ecgI.setCurve(-1);
+                        //ecgI.setCurve(-1);
                     }
                     if (ecg_data.ECG_II != null && ecg_data.ECG_II.size() > 0) {
                         for (int i : ecg_data.ECG_II) {
                             ecgII.setCurve(i);
                         }
                     } else {
-                        ecgII.setCurve(-1);
+                        //ecgII.setCurve(-1);
                     }
                     if (ecg_data.ECG_III != null && ecg_data.ECG_III.size() > 0) {
                         for (int i : ecg_data.ECG_III) {
                             ecgIII.setCurve(i);
                         }
                     } else {
-                        ecgII.setCurve(-1);
+                        //ecgII.setCurve(-1);
                     }
                     if (ecg_data.ECG_AVR != null && ecg_data.ECG_AVR.size() > 0) {
                         for (int i : ecg_data.ECG_AVR) {
                             ecgAVR.setCurve(i);
                         }
                     } else {
-                        ecgAVR.setCurve(-1);
+                        //ecgAVR.setCurve(-1);
                     }
                     if (ecg_data.ECG_AVL != null && ecg_data.ECG_AVL.size() > 0) {
                         for (int i : ecg_data.ECG_AVL) {
                             ecgAVL.setCurve(i);
                         }
                     } else {
-                        ecgAVL.setCurve(-1);
+                        //ecgAVL.setCurve(-1);
                     }
                     if (ecg_data.ECG_AVF != null && ecg_data.ECG_AVF.size() > 0) {
                         for (int i : ecg_data.ECG_AVF) {
                             ecgAVF.setCurve(i);
                         }
                     } else {
-                        ecgAVF.setCurve(-1);
+                        //ecgAVF.setCurve(-1);
                     }
                     if (ecg_data.ECG_V1 != null && ecg_data.ECG_V1.size() > 0) {
                         for (int i : ecg_data.ECG_V1) {
                             ecgV1.setCurve(i);
                         }
                     } else {
-                        ecgV1.setCurve(-1);
+                        //ecgV1.setCurve(-1);
                     }
                     if (ecg_data.ECG_V2 != null && ecg_data.ECG_V2.size() > 0) {
                         for (int i : ecg_data.ECG_V2) {
                             ecgV2.setCurve(i);
                         }
                     } else {
-                        ecgV2.setCurve(-1);
+                        //ecgV2.setCurve(-1);
                     }
                     if (ecg_data.ECG_V3 != null && ecg_data.ECG_V3.size() > 0) {
                         for (int i : ecg_data.ECG_V3) {
                             ecgV3.setCurve(i);
                         }
                     } else {
-                        ecgV3.setCurve(-1);
+                        //ecgV3.setCurve(-1);
                     }
                     if (ecg_data.ECG_V4 != null && ecg_data.ECG_V4.size() > 0) {
                         for (int i : ecg_data.ECG_V4) {
                             ecgV4.setCurve(i);
                         }
                     } else {
-                        ecgV4.setCurve(-1);
+                        //ecgV4.setCurve(-1);
                     }
                     if (ecg_data.ECG_V5 != null && ecg_data.ECG_V5.size() > 0) {
                         for (int i : ecg_data.ECG_V5) {
                             ecgV5.setCurve(i);
                         }
                     } else {
-                        ecgV5.setCurve(-1);
+                        //ecgV5.setCurve(-1);
                     }
                     if (ecg_data.ECG_V6 != null && ecg_data.ECG_V6.size() > 0) {
                         for (int i : ecg_data.ECG_V6) {
                             ecgV6.setCurve(i);
                         }
                     } else {
-                        ecgV6.setCurve(-1);
+                        //ecgV6.setCurve(-1);
                     }
                 }
             } catch (InterruptedException e) {

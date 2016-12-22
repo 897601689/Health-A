@@ -59,35 +59,59 @@ public class MenuEcgActivity extends Activity {
     RadioGroup st;
 
     //region 命令数组
-    byte[] notch_off = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x80};
-    byte[] notch_50 = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x90};
-    byte[] notch_60 = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x91};
+    static byte[] notch_off = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x80};
+    static byte[] notch_50 = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x90};
+    static byte[] notch_60 = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x91};
 
-    byte[] gain_I_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x80};
-    byte[] gain_I_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x81};
-    byte[] gain_I_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x82};
-    byte[] gain_I_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x83};
+    static byte[] gain_I_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x80};
+    static byte[] gain_I_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x81};
+    static byte[] gain_I_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x82};
+    static byte[] gain_I_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x83};
 
-    byte[] gain_II_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x90};
-    byte[] gain_II_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x91};
-    byte[] gain_II_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x92};
-    byte[] gain_II_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x93};
+    static byte[] gain_II_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x90};
+    static byte[] gain_II_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x91};
+    static byte[] gain_II_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x92};
+    static byte[] gain_II_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0x93};
 
-    byte[] gain_III_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa0};
-    byte[] gain_III_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa1};
-    byte[] gain_III_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa2};
-    byte[] gain_III_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa3};
+    static byte[] gain_III_25 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa0};
+    static byte[] gain_III_50 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa1};
+    static byte[] gain_III_100 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa2};
+    static byte[] gain_III_200 = new byte[]{(byte) 0x42, (byte) 0x80, (byte) 0xa3};
 
-    byte[] filter_diagnosis = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x83};
-    byte[] filter_monitor = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x82};
-    byte[] filter_surgery = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x81};
-    byte[] filter_strong = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x84};
+    static byte[] filter_diagnosis = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x83};
+    static byte[] filter_monitor = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x82};
+    static byte[] filter_surgery = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x81};
+    static byte[] filter_strong = new byte[]{(byte) 0x41, (byte) 0x80, (byte) 0x84};
 
-    public static List<byte[]> gain_I_cmd = new ArrayList<>();
-    public static List<byte[]> gain_II_cmd = new ArrayList<>();
-    public static List<byte[]> gain_III_cmd = new ArrayList<>();
-    List<byte[]> notch_cmd = new ArrayList<>();
-    List<byte[]> filter_cmd = new ArrayList<>();
+    public static List<byte[]> gain_I_cmd = new ArrayList<byte[]>(){{
+        add(gain_I_25);
+        add(gain_I_50);
+        add(gain_I_100);
+        add(gain_I_200);
+    }};
+    public static List<byte[]> gain_II_cmd = new ArrayList<byte[]>(){{
+        add(gain_II_25);
+        add(gain_II_50);
+        add(gain_II_100);
+        add(gain_II_200);
+    }};
+    public static List<byte[]> gain_III_cmd = new ArrayList<byte[]>(){{
+        add(gain_III_25);
+        add(gain_III_50);
+        add(gain_III_100);
+        add(gain_III_200);
+    }};
+    List<byte[]> notch_cmd = new ArrayList<byte[]>(){{
+        add(notch_off);
+        add(notch_50);
+        add(notch_60);
+    }};
+    List<byte[]> filter_cmd = new ArrayList<byte[]>(){{
+        add(filter_diagnosis);
+        add(filter_monitor);
+        add(filter_surgery);
+        add(filter_strong);
+    }};
 
     //endregion
 
@@ -101,28 +125,6 @@ public class MenuEcgActivity extends Activity {
     }
 
     private void init() {
-
-        //region 添加命令到数组
-        gain_I_cmd.add(gain_I_25);
-        gain_I_cmd.add(gain_I_50);
-        gain_I_cmd.add(gain_I_100);
-        gain_I_cmd.add(gain_I_200);
-        gain_II_cmd.add(gain_II_25);
-        gain_II_cmd.add(gain_II_50);
-        gain_II_cmd.add(gain_II_100);
-        gain_II_cmd.add(gain_II_200);
-        gain_III_cmd.add(gain_III_25);
-        gain_III_cmd.add(gain_III_50);
-        gain_III_cmd.add(gain_III_100);
-        gain_III_cmd.add(gain_III_200);
-        notch_cmd.add(notch_off);
-        notch_cmd.add(notch_50);
-        notch_cmd.add(notch_60);
-        filter_cmd.add(filter_diagnosis);
-        filter_cmd.add(filter_monitor);
-        filter_cmd.add(filter_surgery);
-        filter_cmd.add(filter_strong);
-        //endregion
 
         spinnerChannel.setSelection(0, true);    //
         spinnerGain.setSelection(2, true);       //
