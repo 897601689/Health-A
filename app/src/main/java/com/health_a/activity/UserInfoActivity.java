@@ -16,6 +16,7 @@ import com.health_a.R;
 import com.health_a.adapter.UserListAdapter;
 import com.health_a.dao.DBOperation;
 import com.health_a.util.AlertDialog;
+import com.health_a.util.Global;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -199,6 +200,8 @@ public class UserInfoActivity extends Activity {
                 public void onClick(View v) {
                     for (int i = 0; i < listKey.size(); i++) {
                         db.DeleteUserInfo(listKey.get(i));
+                        if(Global.UserID .equals(listKey.get(i)))//如果删除的是当前关联用户 则删除关联状态
+                            Global.UserID = "";
                         DelAll(listKey.get(i));//删除此用户的全部测量信息
                     }
                     FillUserInfo();//重新填充用户信息

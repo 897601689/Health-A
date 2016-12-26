@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.health_a.readutil.DataUtil;
+import com.health_a.util.Global;
 import com.ivsign.android.IDCReader.IDCReaderSDK;
 
 import java.io.IOException;
@@ -128,15 +129,27 @@ public class Mcu_Parsing {
     //endregion
 
     //region 身份证
-    public String getIdState() {
-        return idState;
-    }
+
 
     public String[] getIdInfo() {
         return idInfo;
     }
 
-    String idState = "";
+    public String getIdState1() {
+        return idState1;
+    }
+
+    public String getIdState2() {
+        return idState2;
+    }
+
+    public String getIdState3() {
+        return idState3;
+    }
+
+    String idState1 = "";
+    String idState2 = "";
+    String idState3 = "";
     String[] idInfo = new String[10];
     //endregion
 
@@ -191,6 +204,16 @@ public class Mcu_Parsing {
     public static byte[] bp_N_Cuff_120 = new byte[]{0x32, 0x30, 0x44, 0x38};//20在新生儿模式，设置预充气压力为60mmHg
     //endregion
 
+    //region 身份证命令
+    public static byte[] cmd_SAM = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x12, (byte) 0xFF, (byte) 0xEE  };
+    public static byte[] cmd_find  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x01, 0x22  };
+    public static byte[] cmd_selt  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x02, 0x21  };
+    public static byte[] cmd_read  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x30, 0x01, 0x32 };
+    public static byte[] cmd_sleep  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x00, 0x02};
+    public static byte[] cmd_weak  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x01, 0x03 };
+    //endregion
+
+
     private boolean mcu = false;
     private boolean bp = false;
     private boolean card = false;
@@ -201,6 +224,7 @@ public class Mcu_Parsing {
             buffer = com.Read();
             if (buffer != null) {
                 bp_Error="--";
+                Log.e("list",""+buffer.length);
                 for (byte aByte : buffer) {
                     list.add(aByte);
                 }
@@ -235,8 +259,8 @@ public class Mcu_Parsing {
                         }
                     }
                     //身份证信息
-                    if (list.get(i) == 0xAA) {
-                        if (list.get(i + 1) == 0xAA && list.get(i + 2) == 0xAA) {
+                    if (list.get(i) == (byte)0xAA) {
+                        if (list.get(i + 1) == (byte)0xAA && list.get(i + 2) == (byte)0xAA) {
                             if (list.get(i + 5) == 0x00) {
                                 switch (list.get(i + 6)) {
                                     case 0x04:
@@ -256,6 +280,7 @@ public class Mcu_Parsing {
                                 id_data = GetData(i, 1295, list);
                                 i = i - 1;
                             }
+                            Parsing_id(id_data);
                         }
                     }
                 }
@@ -554,28 +579,29 @@ public class Mcu_Parsing {
      * @throws UnsupportedEncodingException
      */
     private void Parsing_id(byte[] data) throws UnsupportedEncodingException {
+
         switch (data.length) {
             case 11:
                 switch (data[9]) {
                     case (byte) 0x80:
-                        idState = "寻找证/卡失败";
+                        idState1 = "寻找证/卡失败";
                         break;
                     case (byte) 0x81:
-                        idState = "选取证/卡失败";
+                        idState2 = "选取证/卡失败";
                         break;
                     case (byte) 0x91:
-                        idState = "证/卡中此项无内容";
+                        idState3 = "证/卡中此项无内容";
                         break;
                 }
                 break;
             case 15:
                 if (data[9] == (byte) 0x9F && data[14] == (byte) 0x97) {
-                    idState = "寻卡成功";
+                    idState1 = "寻卡成功";
                 }
                 break;
             case 19:
                 if (data[9] == (byte) 0x90 && data[18] == (byte) 0x9C) {
-                    idState = "选卡成功";
+                    idState2 = "选卡成功";
                 }
                 break;
             case 1295:
@@ -586,16 +612,16 @@ public class Mcu_Parsing {
                 String TmpStr = new String(dataBuf, "UTF16-LE");
                 TmpStr = new String(TmpStr.getBytes("UTF-8"));
                 if (!"".equals(TmpStr)) {
-                    idInfo[0] = TmpStr.substring(0, 15);
-                    idInfo[1] = TmpStr.substring(15, 16);
-                    idInfo[2] = TmpStr.substring(16, 18);
-                    idInfo[3] = TmpStr.substring(18, 26);
-                    idInfo[4] = TmpStr.substring(26, 61);
-                    idInfo[5] = TmpStr.substring(61, 79);
-                    idInfo[6] = TmpStr.substring(79, 94);
-                    idInfo[7] = TmpStr.substring(94, 102);
-                    idInfo[8] = TmpStr.substring(102, 110);
-                    idInfo[9] = TmpStr.substring(110, 128);
+                    idInfo[0] = TmpStr.substring(0, 15);//姓名
+                    idInfo[1] = TmpStr.substring(15, 16);//性别
+                    idInfo[2] = TmpStr.substring(16, 18);//民族
+                    idInfo[3] = TmpStr.substring(18, 26);//出生日期
+                    idInfo[4] = TmpStr.substring(26, 61);//住址
+                    idInfo[5] = TmpStr.substring(61, 79);//身份证号
+                    idInfo[6] = TmpStr.substring(79, 94);//签发机关
+                    idInfo[7] = TmpStr.substring(94, 102);//有效起始日期
+                    idInfo[8] = TmpStr.substring(102, 110);//有效截止日期
+                    idInfo[9] = TmpStr.substring(110, 128);//最新住址
                     if (idInfo[1].equals("1"))
                         idInfo[1] = "男";
                     else
@@ -626,6 +652,12 @@ public class Mcu_Parsing {
 //                } catch (Exception ex) {
 //                    idState = "照片解码异常";
 //                }
+                default:
+                    idState1="";
+                    idState2="";
+                    idState3="";
+                    //id_data = null;
+                    break;
 
         }
     }
@@ -661,6 +693,19 @@ public class Mcu_Parsing {
             byte[] cmdByte;
             cmdByte = new byte[]{(byte) 0xFF, 0x30, 0x31, cmd[0], 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, (byte) 0xee};
             cmdPort.Write(cmdByte);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * 发送身份证命令
+     *
+     * @param cmdPort 串口对象
+     * @param cmd     命令
+     */
+    public static void SendIDCmd(MySerialPort cmdPort, byte[] cmd) {
+        try {
+            cmdPort.Write(cmd);
         } catch (IOException e) {
             e.printStackTrace();
         }

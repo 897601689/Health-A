@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.health_a.R;
 import com.health_a.activity.test.EcgActivity;
+import com.health_a.bean.UserInfo;
 import com.health_a.dao.DBOperation;
 import com.health_a.dialog.ActionSheetDialog;
 import com.health_a.dialog.ActionSheetDialog.OnSheetItemClickListener;
@@ -22,6 +23,7 @@ import com.health_a.parsing.Mcu_Parsing;
 import com.health_a.parsing.Spo2_Parsing;
 import com.health_a.util.Global;
 import com.health_a.util.MySurfaceView;
+import com.health_a.util.Utils;
 
 import java.io.IOException;
 import java.util.List;
@@ -121,6 +123,7 @@ public class MainActivity extends Activity {
     Mcu_Parsing mcu = new Mcu_Parsing();//单片机协议解析
     byte[] tempCmd = new byte[]{0x51, (byte) 0x80, (byte) 0x81};//2K体温探头
     private String lead;//当前导联
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,8 +134,8 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    protected void onRestart() {
-        super.onRestart();
+    protected void onResume() {
+        super.onResume();
         if (!"".equals(Global.UserID)) {
             Cursor cursor = db.GetUserByCardId(Global.UserID);
             if (cursor != null) {
@@ -143,6 +146,10 @@ public class MainActivity extends Activity {
                 }
                 cursor.close();
             }
+        }else{
+            mName.setText("");
+            mSex.setText("");
+            mAge.setText("");
         }
     }
 
@@ -171,6 +178,15 @@ public class MainActivity extends Activity {
         Intent intent;
         switch (view.getId()) {
             case R.id.m_scan:
+                byte[] cmd_find = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x01, 0x22};
+
+                new Thread(new IDCardThread()).start();
+                /*try {
+                    Global.mcu_Com.Write(cmd_find);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+                //Mcu_Parsing.SendIDCmd(Global.mcu_Com, cmd_find);//开始寻卡
                 break;
             case R.id.bp_text:
                 Mcu_Parsing.SendBpCmd(Global.mcu_Com, Mcu_Parsing.bp_Start);//开始手动测量
@@ -234,7 +250,7 @@ public class MainActivity extends Activity {
     public Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 101:
+                case 101://心电
                     txtEcg.setText(String.valueOf(Global.ecg.getEcg()));
                     txtResp.setText(String.valueOf(Global.ecg.getResp()));
                     float temp = Global.ecg.getTempData1() / 10f;
@@ -245,15 +261,19 @@ public class MainActivity extends Activity {
                     }
                     ecgLead.setText(lead);
                     break;
-                case 102:
+                case 102://身份证
+                    //mName.setText(mcu.getIdInfo()[0].trim());
+                    //mSex.setText(mcu.getIdInfo()[1]);
+                    //mAge.setText(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
+                    AddOrShowUserInfo();
                     break;
-                case 201:
+                case 201://血氧
                     txtSpo2.setText(String.valueOf(spo2.getSpo2_value()));
                     txtPulse.setText(String.valueOf(spo2.getPulse_value()));
                     //Log.e("SPO2", "" + spo2.getSpo2_value());
                     //Log.e("pulse", "" + spo2.getPulse_value());
                     break;
-                case 301:
+                case 301://血压
                     txtBp.setText(mcu.getBp_H() + "/" + mcu.getBp_L());
                     txtBpState.setText(mcu.getBp_Error());
                     if ("手动".equals(mcu.getBp_Test()) || "连续测量模式".equals(mcu.getBp_Test())) {
@@ -450,5 +470,55 @@ public class MainActivity extends Activity {
                     break;
             }
         }
+    }
+
+    //身份证读取线程
+    public class IDCardThread implements Runnable {
+
+        @Override
+        public void run() {
+            Mcu_Parsing.SendIDCmd(Global.mcu_Com, Mcu_Parsing.cmd_find);//开始寻卡
+            try {
+                Thread.sleep(100);
+                if ("寻卡成功".equals(mcu.getIdState1())) {
+                    Mcu_Parsing.SendIDCmd(Global.mcu_Com, Mcu_Parsing.cmd_selt);//开始选卡
+                    Thread.sleep(100);
+                    if ("选卡成功".equals(mcu.getIdState2())) {
+                        Mcu_Parsing.SendIDCmd(Global.mcu_Com, Mcu_Parsing.cmd_read);//开始读卡
+                        Thread.sleep(1500);
+
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            mHandler.sendEmptyMessage(102);
+
+        }
+    }
+
+    private void AddOrShowUserInfo(){
+
+        Cursor cursor = db.GetUserByCardId(mcu.getIdInfo()[5]);
+        if (cursor == null) {
+            UserInfo user = new UserInfo();
+            user.setIDCard(mcu.getIdInfo()[5]);//保存用户身份证号
+            user.setName(mcu.getIdInfo()[0].trim());
+            user.setAge(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
+            user.setSex(mcu.getIdInfo()[1]);
+            user.setPhone("");
+            db.AddUserInfo(user);
+            mName.setText(mcu.getIdInfo()[0].trim());
+            mSex.setText(mcu.getIdInfo()[1]);
+            mAge.setText(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
+
+        } else {
+            if (cursor.moveToNext()) {
+                mName.setText(cursor.getString(1));
+                mSex.setText(cursor.getString(2));
+                mAge.setText(cursor.getString(3));
+            }
+        }
+        Global.UserID = mcu.getIdInfo()[5];
     }
 }
