@@ -80,9 +80,11 @@ public class Mcu_Parsing {
     }
     //endregion
 
-    //region 按键板
+    //region 按键板和命令
     public String getKey() {
-        return key;
+        String str = key;
+        key = null;
+        return str;
     }
 
     public String getBattery() {
@@ -130,7 +132,6 @@ public class Mcu_Parsing {
 
     //region 身份证
 
-
     public String[] getIdInfo() {
         return idInfo;
     }
@@ -151,6 +152,17 @@ public class Mcu_Parsing {
     String idState2 = "";
     String idState3 = "";
     String[] idInfo = new String[10];
+
+
+    //region 身份证命令
+    public static byte[] cmd_SAM = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x12, (byte) 0xFF, (byte) 0xEE  };
+    public static byte[] cmd_find  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x01, 0x22  };
+    public static byte[] cmd_selt  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x02, 0x21  };
+    public static byte[] cmd_read  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x30, 0x01, 0x32 };
+    public static byte[] cmd_sleep  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x00, 0x02};
+    public static byte[] cmd_weak  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x01, 0x03 };
+    //endregion
+
     //endregion
 
     //region 血压命令
@@ -204,14 +216,6 @@ public class Mcu_Parsing {
     public static byte[] bp_N_Cuff_120 = new byte[]{0x32, 0x30, 0x44, 0x38};//20在新生儿模式，设置预充气压力为60mmHg
     //endregion
 
-    //region 身份证命令
-    public static byte[] cmd_SAM = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x12, (byte) 0xFF, (byte) 0xEE  };
-    public static byte[] cmd_find  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x01, 0x22  };
-    public static byte[] cmd_selt  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x02, 0x21  };
-    public static byte[] cmd_read  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x30, 0x01, 0x32 };
-    public static byte[] cmd_sleep  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x00, 0x02};
-    public static byte[] cmd_weak  = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x02, 0x01, 0x03 };
-    //endregion
 
 
     private boolean mcu = false;
@@ -224,6 +228,7 @@ public class Mcu_Parsing {
             buffer = com.Read();
             if (buffer != null) {
                 bp_Error="--";
+                list.clear();
                 Log.e("list",""+buffer.length);
                 for (byte aByte : buffer) {
                     list.add(aByte);
@@ -231,7 +236,7 @@ public class Mcu_Parsing {
                 for (int i = 0; i < list.size(); i++) {
 
                     //按键板 信息
-                    if (list.get(i) == 0xff && buffer[i + 11] == 0xee) {
+                    if (list.get(i) == (byte)0xFF && list.get(i + 11) == (byte)0xEE) {
                         byte[] mcu_data = GetData(i, 12, list);
                         i = i - 1;
                         Parsing_Mcu(mcu_data);
@@ -352,16 +357,16 @@ public class Mcu_Parsing {
                     battery = "欠压报警";
                     break;
                 case (byte) 0x8c:
-                    key = "按键-强光";
+                    key = "静音";
                     break;
                 case (byte) 0x8d:
-                    key = "按键-模式";
+                    key = "冻结";
                     break;
                 case (byte) 0x8e:
-                    key = "按键-冻结";
+                    key = "血压";
                     break;
                 case (byte) 0x8f:
-                    key = "按键-静音";
+                    key = "菜单";
                     break;
                 case (byte) 0x90:
                     key = "按键-血压";
@@ -633,7 +638,7 @@ public class Mcu_Parsing {
                         idInfo[2] = "";
                     }
                 } else {
-                    id_data = null;
+                    idInfo = null;
                 }
                 //照片解析
 //                try {

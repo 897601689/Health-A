@@ -19,6 +19,7 @@ import com.health_a.dao.DBOperation;
 import com.health_a.dialog.ActionSheetDialog;
 import com.health_a.dialog.ActionSheetDialog.OnSheetItemClickListener;
 import com.health_a.dialog.ActionSheetDialog.SheetItemColor;
+import com.health_a.dialog.AlertDialog;
 import com.health_a.parsing.Mcu_Parsing;
 import com.health_a.parsing.Spo2_Parsing;
 import com.health_a.util.Global;
@@ -84,8 +85,10 @@ public class MainActivity extends Activity {
     TextView txtTempHigh;
     @BindView(R.id.txt_temp_low)
     TextView txtTempLow;
-    @BindView(R.id.txt_temp)
-    TextView txtTemp;
+    @BindView(R.id.txt_temp1)
+    TextView txtTemp1;
+    @BindView(R.id.txt_temp2)
+    TextView txtTemp2;
 
     @BindView(R.id.ecg_info)
     TextView ecgInfo;
@@ -121,7 +124,7 @@ public class MainActivity extends Activity {
     private int lead_index = 0;
     Spo2_Parsing spo2 = new Spo2_Parsing(); //血氧协议解析
     Mcu_Parsing mcu = new Mcu_Parsing();//单片机协议解析
-    byte[] tempCmd = new byte[]{0x51, (byte) 0x80, (byte) 0x81};//2K体温探头
+    byte[] tempCmd = new byte[]{0x51, (byte) 0x80, (byte) 0x80};//2K体温探头
     private String lead;//当前导联
 
     @Override
@@ -146,7 +149,7 @@ public class MainActivity extends Activity {
                 }
                 cursor.close();
             }
-        }else{
+        } else {
             mName.setText("");
             mSex.setText("");
             mAge.setText("");
@@ -178,15 +181,7 @@ public class MainActivity extends Activity {
         Intent intent;
         switch (view.getId()) {
             case R.id.m_scan:
-                byte[] cmd_find = {(byte) 0xAA, (byte) 0xAA, (byte) 0xAA, (byte) 0x96, 0x69, 0x00, 0x03, 0x20, 0x01, 0x22};
-
                 new Thread(new IDCardThread()).start();
-                /*try {
-                    Global.mcu_Com.Write(cmd_find);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-                //Mcu_Parsing.SendIDCmd(Global.mcu_Com, cmd_find);//开始寻卡
                 break;
             case R.id.bp_text:
                 Mcu_Parsing.SendBpCmd(Global.mcu_Com, Mcu_Parsing.bp_Start);//开始手动测量
@@ -196,35 +191,14 @@ public class MainActivity extends Activity {
                 lead_index--;
                 if (lead_index < 0)
                     lead_index = 11;
-                Log.e("MainActivity", "" + lead_index);
                 break;
             case R.id.btn_next:
                 lead_index++;
                 if (lead_index > 11)
                     lead_index = 0;
-                Log.e("MainActivity", "" + lead_index);
                 break;
             case R.id.m_save:
-                new ActionSheetDialog(MainActivity.this)
-                        .builder()
-                        .setCancelable(false)
-                        .setCanceledOnTouchOutside(false)
-                        .addSheetItem("血压菜单", SheetItemColor.Blue,
-                                new OnSheetItemClickListener() {
-                                    @Override
-                                    public void onClick(int which) {
-                                        Intent intent = new Intent(MainActivity.this, MenuBpActivity.class);
-                                        startActivity(intent);
-                                    }
-                                })
-                        .addSheetItem("心电菜单", SheetItemColor.Blue,
-                                new OnSheetItemClickListener() {
-                                    @Override
-                                    public void onClick(int which) {
-                                        Intent intent = new Intent(MainActivity.this, MenuEcgActivity.class);
-                                        startActivity(intent);
-                                    }
-                                }).show();
+
                 break;
             case R.id.ecg_info:
                 Global.isEcgAll = true;
@@ -253,18 +227,21 @@ public class MainActivity extends Activity {
                 case 101://心电
                     txtEcg.setText(String.valueOf(Global.ecg.getEcg()));
                     txtResp.setText(String.valueOf(Global.ecg.getResp()));
-                    float temp = Global.ecg.getTempData1() / 10f;
-                    if (temp != 0.1f && temp != 55) {
-                        txtTemp.setText(String.valueOf(temp));
+                    float temp1 = Global.ecg.getTempData1() / 10f;
+                    if (temp1 != 0.1f && temp1 != 55.0f) {
+                        txtTemp1.setText(String.valueOf(temp1));
                     } else {
-                        txtTemp.setText("--");
+                        txtTemp1.setText("--");
+                    }
+                    float temp2 = Global.ecg.getTempData2() / 10f;
+                    if (temp2 != 0.1f && temp2 != 55.0f) {
+                        txtTemp2.setText(String.valueOf(temp2));
+                    } else {
+                        txtTemp2.setText("--");
                     }
                     ecgLead.setText(lead);
                     break;
                 case 102://身份证
-                    //mName.setText(mcu.getIdInfo()[0].trim());
-                    //mSex.setText(mcu.getIdInfo()[1]);
-                    //mAge.setText(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
                     AddOrShowUserInfo();
                     break;
                 case 201://血氧
@@ -281,6 +258,7 @@ public class MainActivity extends Activity {
                     } else {
                         txtMode.setText("自动测量" + mcu.getBp_Test() + "分钟");
                     }
+                    key_DataProcess();//解析按键
                     break;
                 default:
                     break;
@@ -420,7 +398,7 @@ public class MainActivity extends Activity {
                 while (true) {
                     Thread.sleep(10);
                     mcu.Parsing(Global.mcu_Com);
-                    key_DataProcess();
+
                     mHandler.sendEmptyMessage(301);
                 }
             } catch (Exception ex) {
@@ -442,14 +420,37 @@ public class MainActivity extends Activity {
                         e.printStackTrace();
                     }
                     break;
-                case "按键-冻结":
+                case "静音":
+
                     break;
-                case "按键-静音":
-                    break;
-                case "按键-血压":
+                case "血压":
                     Mcu_Parsing.SendBpCmd(Global.mcu_Com, Mcu_Parsing.bp_Start);//开始手动测量
                     break;
-                case "按键-菜单":
+                case "冻结":
+
+                    break;
+                case "菜单":
+                    new ActionSheetDialog(MainActivity.this)
+                            .builder()
+                            .setTitle("请选择操作")
+                            .setCancelable(false)
+                            .setCanceledOnTouchOutside(false)
+                            .addSheetItem("血压菜单", SheetItemColor.Blue,
+                                    new OnSheetItemClickListener() {
+                                        @Override
+                                        public void onClick(int which) {
+                                            Intent intent = new Intent(MainActivity.this, MenuBpActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    })
+                            .addSheetItem("心电菜单", SheetItemColor.Blue,
+                                    new OnSheetItemClickListener() {
+                                        @Override
+                                        public void onClick(int which) {
+                                            Intent intent = new Intent(MainActivity.this, MenuEcgActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    }).show();
                     break;
             }
         }
@@ -486,32 +487,34 @@ public class MainActivity extends Activity {
                     if ("选卡成功".equals(mcu.getIdState2())) {
                         Mcu_Parsing.SendIDCmd(Global.mcu_Com, Mcu_Parsing.cmd_read);//开始读卡
                         Thread.sleep(1500);
-
+                        mHandler.sendEmptyMessage(102);
                     }
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            mHandler.sendEmptyMessage(102);
+            //mHandler.sendEmptyMessage(102);
 
         }
     }
 
-    private void AddOrShowUserInfo(){
+    private void AddOrShowUserInfo() {
 
         Cursor cursor = db.GetUserByCardId(mcu.getIdInfo()[5]);
         if (cursor == null) {
-            UserInfo user = new UserInfo();
-            user.setIDCard(mcu.getIdInfo()[5]);//保存用户身份证号
-            user.setName(mcu.getIdInfo()[0].trim());
-            user.setAge(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
-            user.setSex(mcu.getIdInfo()[1]);
-            user.setPhone("");
-            db.AddUserInfo(user);
-            mName.setText(mcu.getIdInfo()[0].trim());
-            mSex.setText(mcu.getIdInfo()[1]);
-            mAge.setText(String.valueOf(Utils.getAge(mcu.getIdInfo()[5])));
-
+            String[] idInfo = mcu.getIdInfo();
+            if(idInfo!=null) {
+                UserInfo user = new UserInfo();
+                user.setIDCard(idInfo[5]);//保存用户身份证号
+                user.setName(idInfo[0].trim());
+                user.setAge(String.valueOf(Utils.getAge(idInfo[5])));
+                user.setSex(idInfo[1]);
+                user.setPhone("");
+                db.AddUserInfo(user);
+                mName.setText(idInfo[0].trim());
+                mSex.setText(idInfo[1]);
+                mAge.setText(String.valueOf(Utils.getAge(idInfo[5])));
+            }
         } else {
             if (cursor.moveToNext()) {
                 mName.setText(cursor.getString(1));

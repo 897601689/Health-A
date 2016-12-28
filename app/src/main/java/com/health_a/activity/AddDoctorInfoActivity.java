@@ -15,7 +15,7 @@ import com.health_a.R;
 import com.health_a.bean.DoctorInfo;
 import com.health_a.dao.DBOperation;
 import com.health_a.dialog.MyDialog;
-import com.health_a.util.AlertDialog;
+import com.health_a.dialog.MyAlertDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -160,7 +160,7 @@ public class AddDoctorInfoActivity extends Activity {
                         }
                         this.finish();
                     }else{
-                        final AlertDialog builder = new AlertDialog(AddDoctorInfoActivity.this);
+                        final MyAlertDialog builder = new MyAlertDialog(AddDoctorInfoActivity.this);
                         builder.setMessage("密码不能为空！");
                         builder.setPositiveButton("确   定", new View.OnClickListener() {
                             @Override
@@ -170,7 +170,7 @@ public class AddDoctorInfoActivity extends Activity {
                         });
                     }
                 }else{
-                    final AlertDialog builder = new AlertDialog(AddDoctorInfoActivity.this);
+                    final MyAlertDialog builder = new MyAlertDialog(AddDoctorInfoActivity.this);
                     builder.setMessage("姓名不能为空！");
                     builder.setPositiveButton("确   定", new View.OnClickListener() {
                         @Override

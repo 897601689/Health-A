@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
+import com.health_a.dialog.MyAlertDialog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -289,7 +291,7 @@ public class Utils {
 
     //
     public static void AlertDialog(Context context,String msg){
-        final AlertDialog builder = new AlertDialog(context);
+        final MyAlertDialog builder = new MyAlertDialog(context);
         builder.setMessage(msg);
         builder.setPositiveButton("确   定", new View.OnClickListener() {
             @Override

@@ -1,4 +1,4 @@
-package com.health_a.util;
+package com.health_a.dialog;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,7 +13,7 @@ import com.health_a.R;
 /**
  * Created by Admin on 2016/2/3. 警告通知窗口
  */
-public class AlertDialog {
+public class MyAlertDialog {
     Context context;
     android.app.AlertDialog ad;
     TextView titleView;
@@ -22,7 +22,7 @@ public class AlertDialog {
     TextView txt_sure;
     TextView txt_cancel;
 
-    public AlertDialog(Context context) {
+    public MyAlertDialog(Context context) {
         this.context = context;
         ad = new android.app.AlertDialog.Builder(context).create();
         ad.show();

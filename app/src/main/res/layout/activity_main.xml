@@ -174,7 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="50dp"
-                        android:text="--/--"
+                        android:text="---/---"
                         android:textColor="#05C4F4"
                         android:textSize="55sp" />
 
@@ -399,16 +399,6 @@
                         android:textSize="30sp" />
 
                     <TextView
-                        android:id="@+id/txt_temp_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/txt_temp_low"
-                        android:layout_alignTop="@+id/txt_temp"
-                        android:text="38"
-                        android:textColor="#FFFFFF"
-                        android:textSize="25sp" />
-
-                    <TextView
                         android:id="@+id/txt_temp_low"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -419,16 +409,38 @@
                         android:textColor="#FFFFFF"
                         android:textSize="25sp" />
 
+
                     <TextView
-                        android:id="@+id/txt_temp"
+                        android:id="@+id/txt_temp1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_above="@+id/txt_temp_low"
-                        android:layout_marginStart="55dp"
-                        android:layout_toEndOf="@+id/txt_temp_high"
                         android:text="--"
                         android:textColor="#FFFFFF"
-                        android:textSize="55sp" />
+                        android:textSize="55sp"
+                        android:layout_below="@+id/txt_temp2"
+                        android:layout_alignStart="@+id/txt_temp2" />
+
+                    <TextView
+                        android:id="@+id/txt_temp2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="54dp"
+                        android:text="--"
+                        android:textColor="#FFFFFF"
+                        android:textSize="55sp"
+                        android:layout_alignTop="@+id/title_temp"
+                        android:layout_toEndOf="@+id/txt_temp_high" />
+
+                    <TextView
+                        android:id="@+id/txt_temp_high"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="38"
+                        android:textColor="#FFFFFF"
+                        android:textSize="25sp"
+                        android:layout_alignBaseline="@+id/txt_temp2"
+                        android:layout_alignBottom="@+id/txt_temp2"
+                        android:layout_alignStart="@+id/txt_temp_low" />
 
 
                 </RelativeLayout>

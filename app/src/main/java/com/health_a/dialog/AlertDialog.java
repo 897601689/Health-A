@@ -97,7 +97,7 @@ public class AlertDialog {
                                          final View.OnClickListener listener) {
         showPosBtn = true;
         if ("".equals(text)) {
-            btn_pos.setText("取消");
+            btn_pos.setText("确定");
         } else {
             btn_pos.setText(text);
         }
@@ -115,7 +115,7 @@ public class AlertDialog {
                                          final View.OnClickListener listener) {
         showNegBtn = true;
         if ("".equals(text)) {
-            btn_neg.setText("提示");
+            btn_neg.setText("取消");
         } else {
             btn_neg.setText(text);
         }
@@ -131,7 +131,7 @@ public class AlertDialog {
 
     private void setLayout() {
         if (!showTitle && !showMsg) {
-            txt_title.setText("��ʾ");
+            txt_title.setText("提示");
             txt_title.setVisibility(View.VISIBLE);
         }
 

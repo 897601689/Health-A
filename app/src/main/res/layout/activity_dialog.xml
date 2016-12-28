@@ -4,7 +4,7 @@
     android:layout_width="500dp"
     android:layout_height="200dp"
     android:layout_gravity="center"
-    android:background="#ffffff">
+    android:background="@drawable/alert_bg">
 
     <TextView
         android:id="@+id/dialog_txt"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp">
+        android:layout_marginBottom="20dp">
 
         <TextView
             android:id="@+id/cancel_cancel_txt"

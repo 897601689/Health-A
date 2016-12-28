@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.health_a.R;
 import com.health_a.adapter.DoctorListAdapter;
 import com.health_a.dao.DBOperation;
-import com.health_a.util.AlertDialog;
+import com.health_a.dialog.MyAlertDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -163,7 +163,7 @@ public class DoctorInfoActivity extends Activity {
             this.finish();
         } else {
             if (listKey.size() == 0) {
-                final AlertDialog builder = new AlertDialog(DoctorInfoActivity.this);
+                final MyAlertDialog builder = new MyAlertDialog(DoctorInfoActivity.this);
                 builder.setMessage("没选中任何项");
                 builder.setPositiveButton("确   定", new View.OnClickListener() {
                     @Override
@@ -172,7 +172,7 @@ public class DoctorInfoActivity extends Activity {
                     }
                 });
             } else {
-                final AlertDialog builder = new AlertDialog(DoctorInfoActivity.this);
+                final MyAlertDialog builder = new MyAlertDialog(DoctorInfoActivity.this);
                 builder.setMessage("只能选中一项进行修改");
                 builder.setPositiveButton("确   定", new View.OnClickListener() {
                     @Override
@@ -196,7 +196,7 @@ public class DoctorInfoActivity extends Activity {
         }
 
         if (listKey.size() > 0) {
-            final AlertDialog builder = new AlertDialog(DoctorInfoActivity.this);
+            final MyAlertDialog builder = new MyAlertDialog(DoctorInfoActivity.this);
             builder.setMessage("确定要删除选中项吗？");
             builder.setPositiveButton("确   定", new View.OnClickListener() {
                 @Override
@@ -216,7 +216,7 @@ public class DoctorInfoActivity extends Activity {
                 }
             });
         } else {
-            final AlertDialog builder = new AlertDialog(DoctorInfoActivity.this);
+            final MyAlertDialog builder = new MyAlertDialog(DoctorInfoActivity.this);
             builder.setMessage("没选中任何项");
             builder.setPositiveButton("确   定", new View.OnClickListener() {
                 @Override

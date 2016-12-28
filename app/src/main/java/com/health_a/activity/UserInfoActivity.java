@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.health_a.R;
 import com.health_a.adapter.UserListAdapter;
 import com.health_a.dao.DBOperation;
-import com.health_a.util.AlertDialog;
+import com.health_a.dialog.MyAlertDialog;
 import com.health_a.util.Global;
 
 import java.util.ArrayList;
@@ -63,11 +63,11 @@ public class UserInfoActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 TextView time_txt = (TextView) view.findViewById(R.id.item_id);
-                Intent intent = new Intent(UserInfoActivity.this,AddUserInfoActivity.class);
+                Intent intent = new Intent(UserInfoActivity.this, AddUserInfoActivity.class);
                 intent.putExtra("type", "info");
                 intent.putExtra("id", time_txt.getText().toString());
                 startActivity(intent);
-                Log.e("22","11");
+                Log.e("22", "11");
             }
         });
     }
@@ -152,7 +152,7 @@ public class UserInfoActivity extends Activity {
             listKey.add(key);
         }
         if (listKey.size() == 1) {
-            Intent intent = new Intent(UserInfoActivity.this,AddUserInfoActivity.class);
+            Intent intent = new Intent(UserInfoActivity.this, AddUserInfoActivity.class);
             intent.putExtra("type", "update");
             intent.putExtra("id", listKey.get(0));
             startActivity(intent);
@@ -160,7 +160,7 @@ public class UserInfoActivity extends Activity {
             this.finish();
         } else {
             if (listKey.size() == 0) {
-                final AlertDialog builder = new AlertDialog(UserInfoActivity.this);
+                final MyAlertDialog builder = new MyAlertDialog(UserInfoActivity.this);
                 builder.setMessage("没选中任何项");
                 builder.setPositiveButton("确   定", new View.OnClickListener() {
                     @Override
@@ -170,7 +170,7 @@ public class UserInfoActivity extends Activity {
                 });
                 //Toast.makeText(getApplicationContext(), "没选中任何项", Toast.LENGTH_SHORT).show();
             } else {
-                final AlertDialog builder = new AlertDialog(UserInfoActivity.this);
+                final MyAlertDialog builder = new MyAlertDialog(UserInfoActivity.this);
                 builder.setMessage("只能选中一项进行修改");
                 builder.setPositiveButton("确   定", new View.OnClickListener() {
                     @Override
@@ -193,14 +193,14 @@ public class UserInfoActivity extends Activity {
         }
 
         if (listKey.size() > 0) {
-            final AlertDialog builder = new AlertDialog(UserInfoActivity.this);
+            final MyAlertDialog builder = new MyAlertDialog(UserInfoActivity.this);
             builder.setMessage("检测数据将同时被删除，\n确定要删除选中项吗？");
             builder.setPositiveButton("确   定", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     for (int i = 0; i < listKey.size(); i++) {
                         db.DeleteUserInfo(listKey.get(i));
-                        if(Global.UserID .equals(listKey.get(i)))//如果删除的是当前关联用户 则删除关联状态
+                        if (Global.UserID.equals(listKey.get(i)))//如果删除的是当前关联用户 则删除关联状态
                             Global.UserID = "";
                         DelAll(listKey.get(i));//删除此用户的全部测量信息
                     }
@@ -218,7 +218,8 @@ public class UserInfoActivity extends Activity {
 
             //Toast.makeText(getApplicationContext(), "确定要删除选中项吗？", Toast.LENGTH_SHORT).show();
         } else {
-            final AlertDialog builder = new AlertDialog(UserInfoActivity.this);
+
+            final MyAlertDialog builder = new MyAlertDialog(UserInfoActivity.this);
             builder.setMessage("没选中任何项");
             builder.setPositiveButton("确   定", new View.OnClickListener() {
                 @Override
@@ -232,7 +233,7 @@ public class UserInfoActivity extends Activity {
 
 
     //删除用户的全部测量信息
-    private void DelAll(String IDCard){
+    private void DelAll(String IDCard) {
         db.DeleteTempTsetData(IDCard);
         db.DeleteBsTestData(IDCard);
         db.DeleteUmTestData(IDCard);

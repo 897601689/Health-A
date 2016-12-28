@@ -20,7 +20,7 @@ import com.health_a.bean.UserInfo;
 import com.health_a.dao.DBOperation;
 import com.health_a.dialog.DatePickerDialog;
 import com.health_a.dialog.MyDialog;
-import com.health_a.util.AlertDialog;
+import com.health_a.dialog.MyAlertDialog;
 import com.health_a.util.Utils;
 
 import java.util.Calendar;
@@ -105,7 +105,7 @@ public class AddUserInfoActivity extends Activity {
             addUserIdEdit.setEnabled(false);
             isUpadte = true;
             addTitleTxt.setText("修改用户信息");
-        }else if("info".equals(intent.getStringExtra("type"))){
+        } else if ("info".equals(intent.getStringExtra("type"))) {
             id = intent.getStringExtra("id");
             Log.e("id", id);
             Cursor cursor = db.GetUserByCardId(id);
@@ -216,7 +216,7 @@ public class AddUserInfoActivity extends Activity {
             user.setName(name);//保存用户姓名
             if (!IDCard.isEmpty()) {
                 if (!Utils.IDCardValidate(IDCard).equals("true")) {
-                    final AlertDialog builder = new AlertDialog(AddUserInfoActivity.this);
+                    final MyAlertDialog builder = new MyAlertDialog(AddUserInfoActivity.this);
                     builder.setMessage("身份证号格式不正确！");
                     builder.setPositiveButton("确   定", new View.OnClickListener() {
                         @Override
@@ -244,7 +244,7 @@ public class AddUserInfoActivity extends Activity {
 
                 }
             } else {
-                final AlertDialog builder = new AlertDialog(AddUserInfoActivity.this);
+                final MyAlertDialog builder = new MyAlertDialog(AddUserInfoActivity.this);
                 builder.setMessage("身份证号不能为空！");
                 builder.setPositiveButton("确   定", new View.OnClickListener() {
                     @Override
@@ -254,7 +254,7 @@ public class AddUserInfoActivity extends Activity {
                 });
             }
         } else {
-            final AlertDialog builder = new AlertDialog(AddUserInfoActivity.this);
+            final MyAlertDialog builder = new MyAlertDialog(AddUserInfoActivity.this);
             builder.setMessage("姓名不能为空！");
             builder.setPositiveButton("确   定", new View.OnClickListener() {
                 @Override
