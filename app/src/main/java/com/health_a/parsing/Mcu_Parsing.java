@@ -29,9 +29,9 @@ public class Mcu_Parsing {
 
     //region 血压
     private String cuff_Pressure;   //袖带压
-    private String bp_H = "--";     //收缩压
-    private String bp_L = "--";     //舒张压
-    private String bp_Avg = "--";   //平均压
+    private String bp_H = "---";     //收缩压
+    private String bp_L = "---";     //舒张压
+    private String bp_Avg = "---";   //平均压
     private String bp_Pulse = "--"; //脉率
     private String bp_Error = "--"; //错误代码
     private String bp_Mode = "--";  //病人模式

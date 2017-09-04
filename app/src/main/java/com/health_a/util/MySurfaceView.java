@@ -4,20 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Path;
-import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Admin on 2016/10/27. 画曲线控件
@@ -44,8 +37,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private Paint mPaint;
 
     private int curve = -1;//数据
-    private String info = "I";//导联
-    private int backColor = Color.rgb(202, 204, 202);//背景颜色
+    private String info = "";//导联
+    private int backColor = Color.rgb(202,204,202);//背景颜色
     private int pen = Color.rgb(255, 0, 0);//画笔颜色
     private int textSize = 14;//字体大小
     private int amplitude = 25;//幅值长度
@@ -97,6 +90,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
      */
     private void initView() {
         mSurfaceHolder = getHolder();
+        //setZOrderOnTop(true);
+        //getHolder().setFormat(PixelFormat.TRANSLUCENT);
         mSurfaceHolder.addCallback(this);
         //setFocusable(true);//用键盘是否能获得焦点
         //setFocusableInTouchMode(true);//触摸是否能获得焦点
@@ -173,14 +168,15 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         try {
             mCanvas = mSurfaceHolder.lockCanvas(new Rect(x, 0, x + 3 + 15, getHeight()));//
             mCanvas.drawColor(backColor);
+            //mCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
             //curve为-1时数据无效
             if (curve != -1) {
 
                 float y2 = curve;
-                float yy1 = getHeight() - (getHeight() * y / 250);
-                float yy2 = getHeight() - (getHeight() * y2 / 250);
+                float yy1 = getHeight() - (getHeight() * y / 256);
+                float yy2 = getHeight() - (getHeight() * y2 / 256);
                 mCanvas.drawLine(x, yy1, x + 1, yy2, mPaint);
-                mCanvas.drawText(info, 20, 30, mPaint);
+                mCanvas.drawText(info, 10, 20, mPaint);
                 mCanvas.drawLine(getWidth() - 30, ((getHeight() - amplitude) / 2), getWidth() - 30, ((getHeight() - amplitude) / 2) + amplitude, mPaint);
                 //Log.e(y+" "+yy1,y2+" "+yy2);
                 y = y2;
@@ -193,9 +189,12 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 //mCanvas = mSurfaceHolder.lockCanvas();
                 //mCanvas.drawColor(backColor);
                 mPaint.setTextSize(textSize);
-                mCanvas.drawText(info, 20, 30, mPaint);
+                mCanvas.drawText(info, 10, 20, mPaint);
                 mCanvas.drawLine(getWidth() - 30, ((getHeight() - amplitude) / 2), getWidth() - 30, ((getHeight() - amplitude) / 2) + amplitude, mPaint);
             }
+
+
+
 
 
         } catch (Exception e) {

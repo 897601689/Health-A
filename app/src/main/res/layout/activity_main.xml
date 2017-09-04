@@ -86,228 +86,229 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+
         <!-- 上部 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <!-- 血压 -->
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/image_bp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/k1" />
+                android:layout_height="match_parent"
+                android:background="@drawable/k1"
+                android:orientation="vertical"
+                android:padding="20dp">
 
                 <TextView
                     android:id="@+id/title_bp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="血压\nmmhg"
+                    android:text="血压(mmhg)"
                     android:textColor="#05C4F4"
-                    android:textSize="30sp" />
+                    android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/bp_text"
-                    android:layout_width="80px"
-                    android:layout_height="40px"
-                    android:layout_alignRight="@+id/image_bp"
-                    android:layout_alignTop="@+id/title_bp"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/btn_small"
-                    android:gravity="center"
-                    android:text="测  量"
-                    android:textColor="#fff"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/txt_mode"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignRight="@+id/bp_text"
-                    android:layout_below="@+id/bp_text"
-                    android:layout_marginTop="5dp"
-                    android:text="手动"
-                    android:textColor="#05C4F4"
-                    android:textSize="20sp" />
+                    android:layout_marginTop="10dp"
+
+                    android:gravity="right">
+
+                    <TextView
+                        android:id="@+id/txt_mode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="手动模式"
+                        android:textColor="#05C4F4"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/bp_text"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/btn_small"
+                        android:gravity="center"
+                        android:text="测  量"
+                        android:textColor="#fff"
+                        android:textSize="20dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/relativeLayout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/title_bp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
                         android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/txt_high_bp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            style="@style/main_txt_limit"
                             android:text="140"
-                            android:textColor="#05C4F4"
-                            android:textSize="25sp" />
+                            android:textColor="#05C4F4" />
 
                         <TextView
                             android:id="@+id/txt_low_bp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            style="@style/main_txt_limit"
                             android:text="60"
-                            android:textColor="#05C4F4"
-                            android:textSize="25sp" />
+                            android:textColor="#05C4F4" />
                     </LinearLayout>
 
 
                     <TextView
                         android:id="@+id/txt_bp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="50dp"
+                        style="@style/main_txt_value"
                         android:text="---/---"
                         android:textColor="#05C4F4"
-                        android:textSize="55sp" />
+                        android:textSize="70sp" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txt_bp_state"
+                    android:id="@+id/txt_bp_avg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/image_bp"
-                    android:layout_centerInParent="true"
-                    android:layout_marginBottom="27dp"
-                    android:layout_marginEnd="33dp"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:ems="2"
+                    android:text="---"
+                    android:textAlignment="center"
+                    android:textColor="#05C4F4"
+                    android:textSize="50sp" />
+
+                <TextView
+                    android:id="@+id/txt_bp_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
                     android:text="测量完成"
+                    android:textAlignment="center"
                     android:textColor="#05C4F4"
                     android:textSize="25sp" />
 
-            </RelativeLayout>
-
+            </LinearLayout>
+            <!-- 血氧 脉率 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:orientation="vertical">
                 <!-- 血氧 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp">
-
-                    <ImageView
-                        android:id="@+id/image_spo2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/k2" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/k2"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/title_spo2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="血氧\n%"
-                        android:textColor="#00FFFF"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/txt_spo2_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/txt_spo2_low"
-                        android:layout_alignTop="@+id/txt_spo2"
-                        android:text="100"
+                        android:text="血氧(%)"
                         android:textColor="#00FFFF"
                         android:textSize="25sp" />
 
-                    <TextView
-                        android:id="@+id/txt_spo2_low"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_spo2"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/title_spo2"
-                        android:text="80"
-                        android:textColor="#00FFFF"
-                        android:textSize="25sp" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txt_spo2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/txt_spo2_low"
-                        android:layout_marginStart="55dp"
-                        android:layout_toEndOf="@+id/txt_spo2_high"
-                        android:text="--"
-                        android:textColor="#00FFFF"
-                        android:textSize="55sp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_spo2_high"
+                                style="@style/main_txt_limit"
+                                android:text="100"
+                                android:textColor="#00FFFF" />
+
+                            <TextView
+                                android:id="@+id/txt_spo2_low"
+                                style="@style/main_txt_limit"
+                                android:text="80"
+                                android:textColor="#00FFFF" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_spo2"
+                            style="@style/main_txt_value"
+                            android:text="--"
+                            android:textColor="#00FFFF"
+                            android:textSize="70sp" />
+
+                    </LinearLayout>
 
 
-                </RelativeLayout>
+                </LinearLayout>
                 <!-- 脉率 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/image_pulse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/k2" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/k2"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/title_pulse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="脉率\nbpm"
-                        android:textColor="#00FFFF"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/txt_pulse_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/txt_pulse_low"
-                        android:layout_alignTop="@+id/txt_pulse"
-                        android:text="100"
+                        android:text="脉率(bpm)"
                         android:textColor="#00FFFF"
                         android:textSize="25sp" />
 
-                    <TextView
-                        android:id="@+id/txt_pulse_low"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_pulse"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/title_pulse"
-                        android:text="50"
-                        android:textColor="#00FFFF"
-                        android:textSize="25sp" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txt_pulse"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/txt_pulse_low"
-                        android:layout_marginStart="55dp"
-                        android:layout_toEndOf="@+id/txt_pulse_high"
-                        android:text="--"
-                        android:textColor="#00FFFF"
-                        android:textSize="55sp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_pulse_high"
+                                style="@style/main_txt_limit"
+                                android:text="100"
+                                android:textColor="#00FFFF" />
+
+                            <TextView
+                                android:id="@+id/txt_pulse_low"
+                                style="@style/main_txt_limit"
+                                android:text="60"
+                                android:textColor="#00FFFF" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_pulse"
+                            style="@style/main_txt_value"
+                            android:text="--"
+                            android:textColor="#00FFFF"
+                            android:textSize="70sp" />
 
 
-                </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -318,202 +319,373 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
+            <!-- 呼吸 体温 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:orientation="vertical">
                 <!-- 呼吸 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp">
-
-                    <ImageView
-                        android:id="@+id/image_resp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/k2" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/k2"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/title_resp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="呼吸\nbpm"
-                        android:textColor="#FFFF00"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/txt_resp_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignStart="@+id/txt_resp_low"
-                        android:layout_alignTop="@+id/txt_resp"
-                        android:text="100"
+                        android:text="呼吸(bpm)"
                         android:textColor="#FFFF00"
                         android:textSize="25sp" />
 
-                    <TextView
-                        android:id="@+id/txt_resp_low"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_resp"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/title_resp"
-                        android:text="30"
-                        android:textColor="#FFFF00"
-                        android:textSize="25sp" />
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txt_resp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/txt_resp_low"
-                        android:layout_marginStart="55dp"
-                        android:layout_toEndOf="@+id/txt_resp_high"
-                        android:text="--"
-                        android:textColor="#FFFF00"
-                        android:textSize="55sp" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_resp_high"
+                                style="@style/main_txt_limit"
+                                android:text="100"
+                                android:textColor="#FFFF00" />
+
+                            <TextView
+                                android:id="@+id/txt_resp_low"
+                                style="@style/main_txt_limit"
+                                android:text="60"
+                                android:textColor="#FFFF00" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_resp"
+                            style="@style/main_txt_value"
+                            android:text="--"
+                            android:textColor="#FFFF00"
+                            android:textSize="70sp" />
 
 
-                </RelativeLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
                 <!-- 体温 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/image_temp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/k2" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/k2"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
                     <TextView
-                        android:id="@+id/title_temp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:text="体温\n℃     "
-                        android:textColor="#FFFFFF"
-                        android:textSize="30sp" />
-
-                    <TextView
-                        android:id="@+id/txt_temp_low"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/title_temp"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/title_temp"
-                        android:text="36"
+                        android:text="体/额温(℃)"
                         android:textColor="#FFFFFF"
                         android:textSize="25sp" />
 
-
-                    <TextView
-                        android:id="@+id/txt_temp1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="--"
-                        android:textColor="#FFFFFF"
-                        android:textSize="55sp"
-                        android:layout_below="@+id/txt_temp2"
-                        android:layout_alignStart="@+id/txt_temp2" />
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/txt_temp2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="54dp"
-                        android:text="--"
-                        android:textColor="#FFFFFF"
-                        android:textSize="55sp"
-                        android:layout_alignTop="@+id/title_temp"
-                        android:layout_toEndOf="@+id/txt_temp_high" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.2"
+                            android:gravity="center"
+                            android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/txt_temp_high"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="38"
-                        android:textColor="#FFFFFF"
-                        android:textSize="25sp"
-                        android:layout_alignBaseline="@+id/txt_temp2"
-                        android:layout_alignBottom="@+id/txt_temp2"
-                        android:layout_alignStart="@+id/txt_temp_low" />
+                            <TextView
+                                android:id="@+id/txt_temp_high"
+                                style="@style/main_txt_limit"
+                                android:text="38"
+                                android:textColor="#FFFFFF" />
+
+                            <TextView
+                                android:id="@+id/txt_temp_low"
+                                style="@style/main_txt_limit"
+                                android:text="36"
+                                android:textColor="#FFFFFF" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_temp1"
+                            style="@style/main_txt_value"
+                            android:ems="1"
+                            android:text="--"
+                            android:textColor="#FFFFFF"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:id="@+id/txt_temp2"
+                            style="@style/main_txt_value"
+                            android:ems="1"
+                            android:text="--"
+                            android:textColor="#FFFFFF"
+                            android:textSize="40sp" />
+
+                        <TextView
+                            android:id="@+id/txt_temp3"
+                            style="@style/main_txt_value"
+                            android:ems="1"
+                            android:text="--"
+                            android:textColor="#FFFFFF"
+                            android:textSize="40sp" />
+
+                    </LinearLayout>
 
 
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
             <!-- 心电 -->
-            <RelativeLayout
+            <LinearLayout
                 android:id="@+id/ecg_btn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/k1"
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <ImageView
-                    android:id="@+id/image_ecg"
-                    android:layout_width="wrap_content"
+                <!-- 标题 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/k1" />
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/title_ecg"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/title_ecg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="心率(bpm)"
+                        android:textColor="#00FF00"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/ecg_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_small"
+                        android:gravity="center"
+                        android:text="详细信息"
+                        android:textColor="#fff"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+                <!-- 测量值 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="心率\nbpm"
-                    android:textColor="#00FF00"
-                    android:textSize="30sp" />
+                    android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/ecg_info"
-                    android:layout_width="90px"
-                    android:layout_height="40px"
-                    android:layout_alignRight="@+id/image_ecg"
-                    android:layout_alignTop="@+id/title_ecg"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/btn_small"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_ecg_high"
+                            style="@style/main_txt_limit"
+                            android:text="100"
+                            android:textColor="#00FF00" />
+
+                        <TextView
+                            android:id="@+id/txt_ecg_low"
+                            style="@style/main_txt_limit"
+                            android:text="80"
+                            android:textColor="#00FF00" />
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/txt_ecg"
+                        style="@style/main_txt_value"
+                        android:text="--"
+                        android:textColor="#00FF00"
+                        android:textSize="70sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="9dp"
                     android:gravity="center"
-                    android:text="详细信息"
-                    android:textColor="#fff"
-                    android:textSize="20dp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txt_ecg_high"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/txt_ecg_low"
-                    android:layout_alignTop="@+id/txt_ecg"
-                    android:text="100"
-                    android:textColor="#00FF00"
-                    android:textSize="25sp" />
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
 
-                <TextView
-                    android:id="@+id/txt_ecg_low"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/title_ecg"
-                    android:layout_marginStart="20dp"
-                    android:layout_toEndOf="@+id/title_ecg"
-                    android:text="80"
-                    android:textColor="#00FF00"
-                    android:textSize="25sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST1："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
 
-                <TextView
-                    android:id="@+id/txt_ecg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_above="@+id/txt_ecg_low"
-                    android:layout_marginStart="55dp"
-                    android:layout_toEndOf="@+id/txt_ecg_high"
-                    android:text="--"
-                    android:textColor="#00FF00"
-                    android:textSize="55sp" />
+                        <TextView
+                            android:id="@+id/txt_st1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
 
-            </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST2："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST3："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST4："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST5："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST6："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST7："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ST8："
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/txt_st8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:text="-1.00"
+                            android:textColor="@color/White"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
+
         <!-- 下部 -->
         <RelativeLayout
             android:layout_width="wrap_content"

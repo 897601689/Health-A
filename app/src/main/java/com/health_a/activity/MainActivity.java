@@ -19,7 +19,6 @@ import com.health_a.dao.DBOperation;
 import com.health_a.dialog.ActionSheetDialog;
 import com.health_a.dialog.ActionSheetDialog.OnSheetItemClickListener;
 import com.health_a.dialog.ActionSheetDialog.SheetItemColor;
-import com.health_a.dialog.AlertDialog;
 import com.health_a.parsing.Mcu_Parsing;
 import com.health_a.parsing.Spo2_Parsing;
 import com.health_a.util.Global;
@@ -157,7 +156,7 @@ public class MainActivity extends Activity {
     }
 
     private void init() {
-        ecg_Curve.setBackColor(Color.rgb(77, 77, 77));//设置背景颜色
+        ecg_Curve.setBackColor(Color.rgb(77,77,77));//设置背景颜色
         ecg_Curve.setPen(Color.GREEN);//设置背景颜色
         db = new DBOperation(MainActivity.this);
         //DoctorID = Global.GetDoctorInfo();//获得登录医生信息
@@ -174,6 +173,7 @@ public class MainActivity extends Activity {
         new Thread(new Spo2Thread()).start();
         new Thread(new EcgThread()).start();
         new Thread(new McuThread()).start();
+
     }
 
     @OnClick({R.id.m_scan, R.id.bp_text, R.id.btn_last, R.id.btn_next, R.id.m_save, R.id.ecg_info, R.id.m_user_info, R.id.m_test_info, R.id.m_sys_info})
@@ -198,6 +198,12 @@ public class MainActivity extends Activity {
                     lead_index = 0;
                 break;
             case R.id.m_save:
+                /*byte[] notch_60 = new byte[]{(byte) 0x4d, (byte) 0x80, (byte) 0x91};
+                try {
+                    Global.ecg_Com.Write(notch_60);//2K体温探头
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
 
                 break;
             case R.id.ecg_info:
